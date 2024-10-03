@@ -1,0 +1,86 @@
+/*
+#FCFAF9 = White
+#48E5C2 = Turqoise
+#FF785A = Orange
+#5E5E5E = Gray
+#3A534E = Medium Gray
+#36413E = Dark Gray
+*/
+
+.background {
+    -fx-background-color: #5E5E5E;
+}
+
+.topBar {
+    -fx-background-color: #36413E;
+}
+
+.button {
+    -fx-background-color: #3A534E;
+    -fx-text-fill: #FCFAF9;
+    -fx-font-family: Corbel;
+    -fx-background-radius: 12;
+}
+
+.button:hover {
+    -fx-background-color: #48E5C2;
+    -fx-text-fill: #36413E;
+    -fx-background-radius: 12;
+}
+
+.loginButton {
+    -fx-background-color: #3A534E;
+    -fx-text-fill: #FCFAF9;
+    -fx-font-family: Corbel;
+    -fx-background-radius: 6;
+}
+
+.loginButton:hover {
+    -fx-background-color: #FF785A;
+    -fx-text-fill: #36413E;
+    -fx-background-radius: 6;
+}
+
+.topBarButton {
+    -fx-background-color: #3A534E;
+    -fx-text-fill: #FCFAF9;
+    -fx-font-family: Corbel;
+    -fx-background-radius: 6;
+}
+
+.topBarButton:hover {
+    -fx-background-color: #48E5C2;
+    -fx-text-fill: #36413E;
+    -fx-background-radius: 6;
+}
+
+.closeButton {
+    -fx-background-color: #5E5E5E;
+    -fx-text-fill: #FCFAF9;
+    -fx-font-family: Corbel;
+    -fx-background-radius: 6;
+}
+
+.closeButton:hover {
+    -fx-background-color: #FF785A;
+    -fx-text-fill: #36413E;
+    -fx-background-radius: 6;
+}
+
+.label {
+    -fx-text-fill: #FCFAF9;
+    -fx-font-family: Corbel;
+}
+
+.testColor1 {
+    -fx-background-color: #48E5C2;
+}
+
+.testColor2 {
+    -fx-background-color: #FF785A;
+}
+
+.errorText {
+    -fx-text-fill: #FF785A;
+    -fx-font-family: Corbel;
+}
