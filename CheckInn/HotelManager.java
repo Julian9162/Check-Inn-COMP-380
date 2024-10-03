@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.PrintWriter;
+
 
 // HotelManager class manages all reservations for hotel.
 // Allows user to create, cancel, and review reservations.
@@ -15,7 +15,7 @@ public class HotelManager {
     ArrayList<Integer> reserveNum = new ArrayList<Integer>();
 
     // generateKey method creates unique identification number for reservation
-    public void generateKey(Reservation newReserve) {
+    private void generateKey(Reservation newReserve) {
 
         // Local variables
         int i, key, first, last;
@@ -79,17 +79,6 @@ public class HotelManager {
 
     } // End generateKey(newReserve)
 
-    public void generateConfirmation(Reservation reserve) {
-
-        try {
-            File file = new File("Reservation_" + reserve.getReserveNum() + ".txt");
-            PrintWriter writer = new PrintWriter(file);
-        }
-
-        catch (Exception e) {}
-
-    }
-
     // createReserve method allows user to create a new reservation.
     // Generates unique confirmation number.
     // Stores reservation key in reservation array list for easy access to specified reservation.
@@ -105,18 +94,23 @@ public class HotelManager {
         // Generate unique key for reservation.
         generateKey(newReserve);
 
-        generateConfirmation(newReserve);
+       // generateConfirmation(newReserve);
         
     } // End createReserve(customerName, roomType, groupSize, checkInDate, checkOutDate) method
 
-    // reviewNum method allows client to review a reservation they booked.
-    public void reviewReserve(int desiredRes) {
-
-        Reservation target;
+    // getReserve method allows user to obtain desired reservation for further processing.
+    public Reservation getReserve(int desiredRes) {
         
-        target = reservation.get(reserveNum.indexOf(desiredRes));
+        return reservation.get(reserveNum.indexOf(desiredRes));
 
     }
 
+    public void cancelReserve(int reservationNumber) {
+        
+        int target = reserveNum.indexOf(reservationNumber);
+        reserveNum.remove(target);
+        reservation.remove(target);
+
+    }
     
 } // End HotelManager
