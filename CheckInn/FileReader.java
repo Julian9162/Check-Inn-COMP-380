@@ -3,10 +3,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-
-
-//import reservation.Reservation;
-
 public class FileReader {
     public static void main(String [] args) throws FileNotFoundException {
         File file;
@@ -23,12 +19,15 @@ public class FileReader {
             int groupSize = Integer.parseInt(scan.nextLine());
             String checkInDate = scan.nextLine();
             String checkOutDate = scan.nextLine();
+            String email = scan.nextLine();
 
             HotelManager hotel = new HotelManager();
 
-            hotel.createReserve(customerName, roomType, groupSize, checkInDate, checkOutDate);
+            hotel.createReserve(customerName, roomType, groupSize, checkInDate, checkOutDate, email);
 
             System.out.println("It worked!");
+
+            scan.close();
 
             
         } catch (Exception e) {
