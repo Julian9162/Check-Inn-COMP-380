@@ -9,6 +9,7 @@ import javafx.stage.*;
 public class ScreenDisplay extends Application {
 
     public Stage window;
+    int x;
 
     public static void main(String[] args) {
         launch(args);
