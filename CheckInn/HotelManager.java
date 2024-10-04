@@ -1,4 +1,4 @@
-package checkinn;
+package CheckInn;
 
 import java.util.LinkedList;
 import java.util.ArrayList;
