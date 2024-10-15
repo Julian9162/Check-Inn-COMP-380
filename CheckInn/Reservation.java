@@ -1,4 +1,4 @@
-package checkinn;
+package CheckInn;
 
 public class Reservation {
     

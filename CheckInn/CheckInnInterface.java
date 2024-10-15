@@ -6,7 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.*;
 import javafx.stage.*;
 
-public class ScreenDisplay extends Application {
+public class CheckInnInterface extends Application {
 
     public Stage window;
 

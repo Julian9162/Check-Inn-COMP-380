@@ -51,7 +51,7 @@
                </padding>
             </Button>
             <Pane prefHeight="50.0" />
-            <Button mnemonicParsing="false" stylesheets="@StyleSheet.css" text="Review a Reservation" textAlignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#reviewButton" stylesheets="@StyleSheet.css" text="Review a Reservation" textAlignment="CENTER">
                <padding>
                   <Insets bottom="50.0" left="40.0" right="40.0" top="50.0" />
                </padding>

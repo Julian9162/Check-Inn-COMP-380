@@ -6,9 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "ScreenDisplay",
+            "name": "CheckInnInterface",
             "request": "launch",
-            "mainClass": "CheckInn.ScreenDisplay",
+            "mainClass": "CheckInn.CheckInnInterface",
             "projectName": "Check-Inn-COMP-380_5c5fcafb",
             "vmArgs": "--module-path \"C:/Program Files/Java/javafx-sdk-23/lib\" --add-modules javafx.controls,javafx.fxml"
         }
