@@ -53,7 +53,7 @@ public class employeeLoginController{
         stage.show();
     }
 
-    //home button handler
+    //login button handler
     public void login(ActionEvent event) throws IOException {
         if(userInput.getText().toString().equals(username) && passInput.getText().toString().equals(password)) {
             stage = (Stage) topBar.getScene().getWindow();

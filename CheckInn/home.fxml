@@ -45,7 +45,7 @@
    <left>
       <VBox alignment="CENTER" prefHeight="330.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" stylesheets="@StyleSheet.css" text="Book a Room" textAlignment="CENTER">
+            <Button mnemonicParsing="false" onAction="#reserveButton" stylesheets="@StyleSheet.css" text="Book a Room" textAlignment="CENTER">
                <padding>
                   <Insets bottom="50.0" left="60.0" right="60.0" top="50.0" />
                </padding>

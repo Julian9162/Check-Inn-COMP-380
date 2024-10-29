@@ -1,4 +1,4 @@
-package checkinn;
+package CheckInn;
 
 import java.io.*;
 

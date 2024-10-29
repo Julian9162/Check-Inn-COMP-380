@@ -1,4 +1,4 @@
-package checkinn;
+package CheckInn;
 
 import java.util.ArrayList;
 import java.io.FileWriter;

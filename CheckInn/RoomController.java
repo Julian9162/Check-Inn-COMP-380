@@ -1,4 +1,4 @@
-package com.example.bookroom;
+package CheckInn;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -47,7 +47,7 @@ public class RoomController {
     //home button handler
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("book-room.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }

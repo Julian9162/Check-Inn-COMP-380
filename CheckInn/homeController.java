@@ -50,4 +50,12 @@ public class homeController{
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    //reveiw a reservation button handler
+    public void reserveButton(ActionEvent event) throws IOException {
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("bookRoom.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }
