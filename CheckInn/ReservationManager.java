@@ -18,8 +18,6 @@ import java.util.ArrayList;
 // Stores all current and upcoming reservations in a linked list.
 public class ReservationManager {
 
-    CustomerManager CM = new CustomerManager(); // Might remove this
-
     // Global variables
     LinkedList<Reservation> reservation = new LinkedList<Reservation>(); // Linked list that stores 
                                                                          // upcoming and current reservations
@@ -44,7 +42,7 @@ public class ReservationManager {
                 String parts[] = line.split(",", 8);
 
                 // Use CustomerManager class to obtain desired customer object
-                Customer c = CM.getCustomer(Integer.parseInt(parts[1]));
+                Customer c = CheckInnInterface.cusManager.getCustomer(Integer.parseInt(parts[1]));
 
                 // Save status of current reservation being read
                 boolean activeStatus;
@@ -164,7 +162,7 @@ public class ReservationManager {
         // Local variables
         Reservation r; // New reservation to be created.
         String[] name = customerName.split(" "); // Split first and last
-        Customer c = CM.getCustomer(name[0], name[1], email); // Obtain a customer object
+        Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
 
         // Creates new reservation. Includes basic reservation information and creates a new key.
         r = new Reservation(generateKey(c), c, roomType, groupSize, checkInDate, checkOutDate, false, "0");
@@ -318,7 +316,7 @@ public class ReservationManager {
                     // Write updated record
                     writer.write(r.getReservationID() + "," + r.getCustomer().getCustomerID() + "," + 
                                     r.getRoomType() + "," + r.getGroupSize() + "," + checkIn + "," + 
-                                    checkOut + "," + r.getActiveStatus());
+                                    checkOut + "," + r.getActiveStatus() + "," + r.getRoomNumber());
                     // Enter new line
                     writer.newLine();
 
@@ -326,15 +324,15 @@ public class ReservationManager {
 
             } // End while
 
+            reader.close(); // Close reader
+            writer.close(); // Close writer
+            
             oldFile.delete(); // Delete old file
             newFile.renameTo(new File("CheckInn\\reservations.txt")); // Save new file
 
-            reader.close(); // Close reader
-            writer.close(); // Close writer
-
         } // End try
 
-        catch(Exception e) {System.out.println("u suck" + e.getMessage());}
+        catch(Exception e) {System.out.println("I/O Error ResManager switchStatus: " + e.getMessage());}
 
     } // End switchReservationStatus(r)
 
