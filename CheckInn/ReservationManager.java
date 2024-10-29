@@ -18,8 +18,6 @@ import java.util.ArrayList;
 // Stores all current and upcoming reservations in a linked list.
 public class ReservationManager {
 
-    CustomerManager CM = new CustomerManager(); // Might remove this
-
     // Global variables
     LinkedList<Reservation> reservation = new LinkedList<Reservation>(); // Linked list that stores 
                                                                          // upcoming and current reservations
@@ -44,7 +42,7 @@ public class ReservationManager {
                 String parts[] = line.split(",", 8);
 
                 // Use CustomerManager class to obtain desired customer object
-                Customer c = CM.getCustomer(Integer.parseInt(parts[1]));
+                Customer c = CheckInnInterface.cusManager.getCustomer(Integer.parseInt(parts[1]));
 
                 // Save status of current reservation being read
                 boolean activeStatus;
@@ -165,6 +163,7 @@ public class ReservationManager {
         // Local variables
         Reservation r; // New reservation to be created.
         String[] name = customerName.split(" "); // Split first and last
+        Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
         Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
 
         // Creates new reservation. Includes basic reservation information and creates a new key.
