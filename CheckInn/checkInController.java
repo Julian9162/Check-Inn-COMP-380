@@ -1,8 +1,6 @@
 package CheckInn;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.event.*;
 import javafx.fxml.*;
@@ -12,15 +10,14 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-public class cancelConfirmationController implements Initializable{
-    @FXML
-    private Button closeButton;
-    @FXML
-    private Label reservationLabel;
+public class checkInController{
     @FXML
     private HBox topBar;
+    @FXML
+    private TextField reserveInput;
+    @FXML
+    private Label errorLabel;
 
-    private long reservationNumber;
     private Stage stage;
     double x = 0, y = 0;
 
@@ -46,17 +43,23 @@ public class cancelConfirmationController implements Initializable{
     //home button handler
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("employeeHome.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        //Initialize variables
-        reservationNumber = CheckInnInterface.reserve.getReservationID();
-
-        //Initialize page
-        reservationLabel.setText("Reservation " + Long.toString(reservationNumber) + " has been cancelled");
+    //search button handler
+    public void search(ActionEvent event) throws IOException {
+        //search for reservation
+        CheckInnInterface.reserve = CheckInnInterface.resManager.getReservation(Long.parseLong(reserveInput.getText().toString()));
+        if (CheckInnInterface.reserve == null) {
+            errorLabel.setText("Invalid reservation ID, please try again.");
+        } else {
+            //switch scenes
+            stage = (Stage) topBar.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("checkedIn.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
     }
 }

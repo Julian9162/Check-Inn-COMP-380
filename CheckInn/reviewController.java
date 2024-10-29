@@ -28,12 +28,14 @@ public class reviewController implements Initializable{
     @FXML
     private Label groupSize;
 
-    private int reservationNumber = 1234;
-    private String checkIn = "Friday";
-    private String checkOut = "Sunday";
-    private String type = "Double";
-    private String name = "Patrick";
-    private int size = 4;
+    //reservation details
+    private long reservationNumber;
+    private String checkIn;
+    private String checkOut;
+    private String type;
+    private String name;
+    private int size;
+
     private Stage stage;
     double x = 0, y = 0;
 
@@ -74,6 +76,16 @@ public class reviewController implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
+        //Initialize variables
+        reservationNumber = CheckInnInterface.reserve.getReservationID();
+        checkIn = CheckInnInterface.reserve.getCheckInDate().getMonthValue() + "/" + 
+                    CheckInnInterface.reserve.getCheckInDate().getDayOfMonth() + "/" + CheckInnInterface.reserve.getCheckInDate().getYear();
+        checkOut = CheckInnInterface.reserve.getCheckOutDate().getMonthValue() + "/" + 
+                    CheckInnInterface.reserve.getCheckOutDate().getDayOfMonth() + "/" + CheckInnInterface.reserve.getCheckOutDate().getYear();
+        type = CheckInnInterface.reserve.getRoomType();
+        size = CheckInnInterface.reserve.getGroupSize();
+        name = CheckInnInterface.reserve.getCustomer().getFirstName();
+
         //Initialize page
         reservationLabel.setText("Reservation: " + reservationNumber + " for " + name);
         roomType.setText(type);

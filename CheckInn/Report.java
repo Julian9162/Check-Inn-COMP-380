@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.File;
+import java.time.LocalDate;
 
 // Report class saves information about a specific report
 public class Report {
@@ -28,8 +29,19 @@ public class Report {
             // Reads from report file
             BufferedReader reader = new BufferedReader(new FileReader(reportFile));
 
-            // Saves title of report
-            title = reader.readLine();
+            if ((line = reader.readLine()) != null) title = line;
+            
+            else {
+
+                BufferedWriter writer = new BufferedWriter(new FileWriter(reportFile));
+                writer.write("CheckInn Report: " + LocalDate.now().getMonthValue() + "/" + LocalDate.now().getDayOfMonth()
+                            + "/" + LocalDate.now().getYear());
+                writer.newLine();
+                reader.close();
+                writer.close();
+                return;
+
+            }
 
             // While loop adds all records to array list
             while ((line = reader.readLine()) != null) record.add(line);
@@ -56,7 +68,7 @@ public class Report {
 
         }
 
-        catch(Exception e) {}
+        catch(Exception e) {System.out.println("Error in Report object: " + e.getMessage());}
 
     }
 

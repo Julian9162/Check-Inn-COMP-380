@@ -12,15 +12,14 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-public class cancelConfirmationController implements Initializable{
+public class checkedInController implements Initializable{
     @FXML
     private Button closeButton;
     @FXML
-    private Label reservationLabel;
-    @FXML
     private HBox topBar;
+    @FXML
+    private Label reservationLabel;
 
-    private long reservationNumber;
     private Stage stage;
     double x = 0, y = 0;
 
@@ -46,7 +45,7 @@ public class cancelConfirmationController implements Initializable{
     //home button handler
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("employeeHome.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
@@ -54,9 +53,15 @@ public class cancelConfirmationController implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables
-        reservationNumber = CheckInnInterface.reserve.getReservationID();
-
-        //Initialize page
-        reservationLabel.setText("Reservation " + Long.toString(reservationNumber) + " has been cancelled");
+        try {
+            if(CheckInnInterface.empManager.checkInCustomer(CheckInnInterface.reserve.getReservationID()).equals("Successful")) {
+                reservationLabel.setText("Room " + CheckInnInterface.reserve.getRoomNumber());
+            } else {
+                reservationLabel.setText(CheckInnInterface.empManager.checkInCustomer(CheckInnInterface.reserve.getReservationID()));
+            }
+        } catch (IOException e) {
+            reservationLabel.setText("Error, please try again.");
+            System.out.println("I/O Exception checkedInController " + e.getMessage());
+        }
     }
 }

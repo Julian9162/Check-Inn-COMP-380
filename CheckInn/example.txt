@@ -1,0 +1,19 @@
+public findRoom(Reservation r) {
+
+    int room = getRoom(r.roomType); // It will return an available room of the desired type
+
+    assignReservationNumber(room, r.reservationID)
+
+    updateRoomAvailability(924,true)
+}
+
+
+
+ReservationNumber,CustomerNumber,Room,inDate,outDate,Status
+1234523,23423423,234,Complete
+12432,22323,0,Cancelled
+
+
+TIME: 9:13 - RESERVATION: 123423 - CUSTOMER: 2543345 - EVENT: Created a reservation
+
+CheckInn Report: 10/28/2024

@@ -15,6 +15,8 @@ public class reviewSearchController{
     private HBox topBar;
     @FXML
     private TextField reserveInput;
+    @FXML
+    private Label errorLabel;
 
     private Stage stage;
     double x = 0, y = 0;
@@ -46,14 +48,18 @@ public class reviewSearchController{
         stage.show();
     }
 
-    //home button handler
+    //search button handler
     public void search(ActionEvent event) throws IOException {
-        //reservation = hotel.getReserve(Integer.parseInt(reserveInput.getText().toString()));
-
-        //switch scenes
-        stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
+        //search for reservation
+        CheckInnInterface.reserve = CheckInnInterface.resManager.getReservation(Long.parseLong(reserveInput.getText().toString()));
+        if (CheckInnInterface.reserve == null) {
+            errorLabel.setText("Invalid reservation ID, please try again.");
+        } else {
+            //switch scenes
+            stage = (Stage) topBar.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
+        }
     }
 }

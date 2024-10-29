@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.reviewSearchController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.checkOutController">
    <top>
       <AnchorPane stylesheets="@StyleSheet.css" BorderPane.alignment="CENTER">
          <children>
@@ -33,7 +33,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="2.0">
                <children>
-                  <Label stylesheets="@StyleSheet.css" text="CheckInn | Review Your Reservation">
+                  <Label stylesheets="@StyleSheet.css" text="CheckInn | Check out a Customer">
                      <font>
                         <Font size="14.0" />
                      </font>

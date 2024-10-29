@@ -12,9 +12,9 @@ import java.util.ArrayList;
 public class CustomerManager {
 
     // Local variables
-    LinkedList<Customer> customer = new LinkedList<Customer>(); //Data structure used to store customer objects
-    ArrayList<Integer> customerID = new ArrayList<Integer>(); // Data structure used to store customer ID numbers
-    ArrayList<String> customerEmail = new ArrayList<String>(); // Data structure used store customer emails
+    private LinkedList<Customer> customer = new LinkedList<Customer>(); //Data structure used to store customer objects
+    private ArrayList<Integer> customerID = new ArrayList<Integer>(); // Data structure used to store customer ID numbers
+    private ArrayList<String> customerEmail = new ArrayList<String>(); // Data structure used store customer emails
 
     // CustomerManager constructor that loads customer data stored in customer.txt csv file 
     // to customer object data structure when called
@@ -24,7 +24,7 @@ public class CustomerManager {
 
             // Variables
             String line; // Stores a line in customer list file
-            File file = new File("customers.txt"); // Stores customer list file
+            File file = new File("CheckInn\\customers.txt"); // Stores customer list file
             BufferedReader reader = new BufferedReader(new FileReader(file)); // Reads lines from customer list file
             
             // While loop is used to read each line from customer list file and create a customer object from data
@@ -80,7 +80,7 @@ public class CustomerManager {
     private void addToCustFile(Customer c) throws Exception {
 
         // Writes lines to end of customer list file
-        BufferedWriter writer = new BufferedWriter(new FileWriter("customers.txt", true));
+        BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInn\\customers.txt", true));
         // Write customer data in following order: customerID, email, lastName, firstName
         writer.write(c.getCustomerID() + "," + c.getEmail() + "," + c.getLastName() + "," + c.getFirstName());
         writer.newLine(); // Create new line

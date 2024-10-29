@@ -15,7 +15,7 @@ import java.time.LocalTime;
 public class ReportManager {
 
     // Global variables
-    File reportList = new File("report_list.txt"); // File that is list of all report files
+    File reportList = new File("CheckInn\\reportList.txt"); // File that is list of all report files
     ArrayList<String> report = new ArrayList<String>(); // Array of all report file names
 
     // ReportManager constructor loads all report objects from report_list.txt file into array list
@@ -33,13 +33,13 @@ public class ReportManager {
 
         } // End try
 
-        catch(Exception e) {}
+        catch(Exception e) {System.out.println("Error Report Manager Constructor: " + e.getMessage());}
 
     } // End ReportManager() constructor
 
     // addEvent() method adds new record to today's report. 
     // Creates new file incase file does not exist.
-    public void addEvent(Reservation reservation, Room room, String event) {
+    public void addEvent(Reservation res, String room, String event) {
 
         try {
 
@@ -49,8 +49,6 @@ public class ReportManager {
 
             // Saves file of today's report
             File file = new File(fileName);
-            // Writes to today's report file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
             // Obtains object of today's report
             Report todaysReport = new Report(fileName);
             // Saves current time
@@ -63,35 +61,35 @@ public class ReportManager {
             switch (event) {
 
             case "Created":
-                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + reservation.getCustomer().getCustomerID()
-                + " - RESERVATION: " + reservation.getReservationID() + " - MESSAGE: Reservation Created");
+                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
+                + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Reservation Created");
                 break;
 
             case "Cancelled":
-                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + reservation.getCustomer().getCustomerID()
-                + " - RESERVATION: " + reservation.getReservationID() + " - MESSAGE: Reservation Cancelled");
+                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
+                + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Reservation Cancelled");
                 break;
 
             case "Completed":
-                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + reservation.getCustomer().getCustomerID()
-                + " - RESERVATION: " + reservation.getReservationID() + " - MESSAGE: Customer Checked Out");
+                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
+                + " - RESERVATION: " + res.getReservationID() + " - ROOM: " + room + " - MESSAGE: Customer Checked Out");
                 break;
 
             case "Absent":
-                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + reservation.getCustomer().getCustomerID()
-                + " - RESERVATION: " + reservation.getReservationID() + " - MESSAGE: Customer Never Arrived");
+                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
+                + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Customer Never Arrived");
                 break;
 
             case "Arrived":
-                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + reservation.getCustomer().getCustomerID()
-                + " - RESERVATION: " + reservation.getReservationID() + " - MESSAGE: Customer Checked In");
+                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
+                + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Customer Checked In");
                 break;
 
             } // End switch
 
         } // End try
 
-        catch(Exception e) {}
+        catch(Exception e) {System.out.println("Error in ReportManager.addEvent " + e.getMessage());}
 
     } // End addEvent(reservation, room, event) method
     

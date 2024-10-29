@@ -20,9 +20,6 @@ public class employeeLoginController{
     @FXML
     private Label loginLabel;
 
-    private String username = "Patrick";
-    private String password = "123";
-
     private Stage stage;
     double x = 0, y = 0;
 
@@ -55,9 +52,9 @@ public class employeeLoginController{
 
     //login button handler
     public void login(ActionEvent event) throws IOException {
-        if(userInput.getText().toString().equals(username) && passInput.getText().toString().equals(password)) {
+        if(CheckInnInterface.empManager.validateEmployee(Integer.parseInt(userInput.getText().toString()), passInput.getText().toString())) {
             stage = (Stage) topBar.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("employeeHome.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
         } else {

@@ -1,8 +1,7 @@
 package CheckInn;
 
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import javafx.event.*;
 import javafx.fxml.*;
@@ -12,15 +11,17 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-public class cancelController implements Initializable{
-    @FXML
-    private Button closeButton;
-    @FXML
-    private Label reservationLabel;
+public class employeeHomeController{
     @FXML
     private HBox topBar;
+    @FXML
+    private PasswordField passInput;
+    @FXML
+    private TextField userInput;
+    @FXML
+    private Label loginLabel;
 
-    private long reservationNumber;
+    private FileChooser fileChooser = new FileChooser();
     private Stage stage;
     double x = 0, y = 0;
 
@@ -51,24 +52,30 @@ public class cancelController implements Initializable{
         stage.show();
     }
 
-    //cancel button handler
-    public void cancelReserve(ActionEvent event) throws IOException {
-        //cancel reservation
-        CheckInnInterface.resManager.removeReservation(CheckInnInterface.reserve.getReservationID(),2);
-        
-        //go back home
+    //check in button handler
+    public void checkIn(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("cancelConfirmation.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("checkInSearch.fxml"));
         stage.setScene(new Scene(root));
-        stage.show();      
+        stage.show();
     }
 
-    @Override
-    public void initialize(URL arg0, ResourceBundle arg1) {
-        //Initialize variables
-        reservationNumber = CheckInnInterface.reserve.getReservationID();
+    //check out button handler
+    public void checkOut(ActionEvent event) throws IOException {
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("checkOutSearch.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 
-        //Initialize page
-        reservationLabel.setText(Long.toString(reservationNumber));
+    //view reports button handler
+    public void viewReports(ActionEvent event) throws IOException {
+        fileChooser.setInitialDirectory(new File("CheckInn\\reports\\"));
+        CheckInnInterface.file = fileChooser.showOpenDialog(new Stage());
+
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("reports.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
     }
 }
