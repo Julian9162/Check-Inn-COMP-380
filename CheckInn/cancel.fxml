@@ -8,15 +8,12 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.reviewController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.cancelController">
    <top>
       <AnchorPane stylesheets="@StyleSheet.css" BorderPane.alignment="CENTER">
          <children>
@@ -32,7 +29,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="2.0">
                <children>
-                  <Label stylesheets="@StyleSheet.css" text="CheckInn | Review Your Reservation">
+                  <Label stylesheets="@StyleSheet.css" text="CheckInn | Cancel Your Reservation">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -48,34 +45,10 @@
    <center>
       <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="reservationLabel" text="Reservation: " />
-            <Pane prefHeight="10.0" prefWidth="200.0" />
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label alignment="CENTER_RIGHT" stylesheets="@StyleSheet.css" text="Check In:" textAlignment="RIGHT">
-                     <opaqueInsets>
-                        <Insets right="50.0" />
-                     </opaqueInsets>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" stylesheets="@StyleSheet.css" text="Check Out:" textAlignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label fx:id="checkInDate" text="Check In Date" GridPane.columnIndex="1" />
-                  <Label fx:id="checkOutDate" text="Check Out Date" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label text="Room Type:" GridPane.rowIndex="2" />
-                  <Label text="Group Size:" GridPane.rowIndex="3" />
-                  <Label fx:id="roomType" text="Type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                  <Label fx:id="groupSize" text="Size" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-               </children>
-            </GridPane>
+            <Label text="Are you sure you want to cancel Reservation: " />
+            <Pane prefHeight="5.0" />
+            <Label fx:id="reservationLabel" text="ReservationNumber" />
+            <Pane prefHeight="20.0" />
             <Pane prefHeight="10.0" prefWidth="200.0" />
             <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#cancelReserve" styleClass="loginButton" stylesheets="@StyleSheet.css" text="Cancel Reservation" />
          </children>

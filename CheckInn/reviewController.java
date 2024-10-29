@@ -23,10 +23,17 @@ public class reviewController implements Initializable{
     private Label reservationLabel;
     @FXML
     private HBox topBar;
+    @FXML
+    private Label roomType;
+    @FXML
+    private Label groupSize;
 
     private int reservationNumber = 1234;
     private String checkIn = "Friday";
     private String checkOut = "Sunday";
+    private String type = "Double";
+    private String name = "Patrick";
+    private int size = 4;
     private Stage stage;
     double x = 0, y = 0;
 
@@ -59,13 +66,18 @@ public class reviewController implements Initializable{
 
     //cancel button handler
     public void cancelReserve(ActionEvent event) throws IOException {
-        //cancel reservation        
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("cancel.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();        
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize page
-        reservationLabel.setText("Reservation: " + reservationNumber);
+        reservationLabel.setText("Reservation: " + reservationNumber + " for " + name);
+        roomType.setText(type);
+        groupSize.setText(Integer.toString(size));
         checkInDate.setText(checkIn);
         checkOutDate.setText(checkOut);
     }

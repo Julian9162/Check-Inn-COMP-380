@@ -3,8 +3,6 @@ package CheckInn;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.io.File;
-import java.io.PrintWriter;
 
 
 // HotelManager class manages all reservations for hotel.

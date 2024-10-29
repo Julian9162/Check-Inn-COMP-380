@@ -1,4 +1,4 @@
-package checkinn;
+package CheckInn;
 
 // Class for customer entity
 public class Customer {
