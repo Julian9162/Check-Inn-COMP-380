@@ -77,14 +77,10 @@ public class EmployeeManager {
         if (!CheckInnInterface.roomManager.updateRoom(r)) return "Unsuccessful";
 
         else {
-
             CheckInnInterface.resManager.switchReservationStatus(r);
+            CheckInnInterface.repManager.addEvent(r, r.getRoomNumber(), "Arrived");
             return "Successful";
-
         }
-
-        CheckInnInterface.repManager.addEvent(r, r.getRoomNumber(), "Arrived");
-
     }
 
     public boolean checkOutCustomer(long reservationID) throws IOException {

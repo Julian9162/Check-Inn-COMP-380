@@ -164,7 +164,6 @@ public class ReservationManager {
         Reservation r; // New reservation to be created.
         String[] name = customerName.split(" "); // Split first and last
         Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
-        Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
 
         // Creates new reservation. Includes basic reservation information and creates a new key.
         r = new Reservation(generateKey(c), c, roomType, groupSize, checkInDate, checkOutDate, false, "0");
