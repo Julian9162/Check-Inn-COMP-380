@@ -77,7 +77,7 @@
                      </children>
                   </AnchorPane>
                   <Pane minHeight="10.0" />
-                  <Label stylesheets="@StyleSheet.css" text="INSERT HOTEL NAME" textAlignment="CENTER">
+                  <Label stylesheets="@StyleSheet.css" text="The Check Inn" textAlignment="CENTER">
                      <font>
                         <Font size="14.0" />
                      </font>

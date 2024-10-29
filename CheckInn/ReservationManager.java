@@ -137,18 +137,19 @@ public class ReservationManager {
 
         // Local variables
         // checkIn and checkOut store reservation dates in string form
-        String checkIn = r.getCheckInDate().getMonthValue() + "/" + r.getCheckInDate().getDayOfMonth() + "/" +
-                        r.getCheckInDate().getYear();
-        String checkOut = r.getCheckOutDate().getMonthValue() + "/" + r.getCheckOutDate().getDayOfMonth() + "/" +
-                        r.getCheckOutDate().getYear();
+        String checkIn = r.getCheckInDate().getYear() + "-" + r.getCheckInDate().getMonthValue() + "-" +
+                        r.getCheckInDate().getDayOfMonth();
+        String checkOut = r.getCheckOutDate().getYear() + "-" + r.getCheckOutDate().getMonthValue() + "-" +
+                        r.getCheckOutDate().getDayOfMonth();
 
         // Writes lines to end of reservation list file
         BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInn\\reservations.txt", true));
 
         // Write reservation data in following order: ReservationID, CustomerID, RoomType, GroupSize, CheckInDate,
         // CheckOutDate, ActiveStatus
+        
         writer.write(r.getReservationID() + "," + r.getCustomer().getCustomerID() + "," + r.getRoomType() + "," 
-                        + r.getGroupSize() + "," + checkIn + "," + checkOut + "," + r.getActiveStatus());
+                        + r.getGroupSize() + "," + checkIn + "," + checkOut + "," + r.getActiveStatus() + "," + r.getRoomNumber());
         writer.newLine(); // Create new line
         writer.close(); // Close BufferedWriter
 
@@ -158,13 +159,13 @@ public class ReservationManager {
     // Generates unique confirmation number.
     // Adds newly created reservation object to reservation linked list
     // Stores reservation key in reservation array list for easy access to specified reservation.
-    public void createReservation(String customerName, String roomType, int groupSize, String checkInDate, 
+    public Reservation createReservation(String customerName, String roomType, int groupSize, String checkInDate, 
                                 String checkOutDate, String email) {
 
         // Local variables
         Reservation r; // New reservation to be created.
         String[] name = customerName.split(" "); // Split first and last
-        Customer c = CM.getCustomer(name[0], name[1], email); // Obtain a customer object
+        Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
 
         // Creates new reservation. Includes basic reservation information and creates a new key.
         r = new Reservation(generateKey(c), c, roomType, groupSize, checkInDate, checkOutDate, false, "0");
@@ -174,6 +175,10 @@ public class ReservationManager {
         // Add newly created reservation object to reservation csv file
         try {addToReservationFile(r);}
         catch(Exception e) {System.out.println("I/O Error: " + e.getMessage());}
+
+        CheckInnInterface.repManager.addEvent(r, "0", "Created");
+
+        return r;
         
     } // End createReservation(customerName, roomType, groupSize, checkInDate, checkOutDate) method
     
@@ -198,38 +203,31 @@ public class ReservationManager {
 
         try{
         
-            // Local variables
-            String line; // Stores record in reservation list file
-            File oldFile = new File("CheckInn\\reservations.txt"); // Stores old csv file
-            File newFile = new File("CheckInn\\temp.txt"); // Stores new csv file
-            BufferedReader reader = new BufferedReader(new FileReader(oldFile)); // Reads from old file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(newFile, true)); // Writes to new file
+            BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInn\\reservations.txt"));
 
-            // While loop reads and processes each individual record in old csv file.
-            while ((line = reader.readLine()) != null) {
+            for (int i = 0; i < reservation.size(); i++) {
 
-                // Split line into its data fields
-                String parts[] = line.split(",");
+                Reservation res = reservation.get(i);
 
-                // If ID of reservation to be removed does not match current record's reservation ID,
-                // add record to new csv file.
-                if (r.getReservationID() != Long.parseLong(parts[0])) {
+                if (res.getReservationID() != r.getReservationID()) {
 
-                    writer.write(line);
+                    String resIn = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
+                    + "-" + res.getCheckInDate().getDayOfMonth();
+
+                    String resOut = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
+                    + "-" + res.getCheckInDate().getDayOfMonth();
+
+                    writer.write(res.getReservationID() + "," + res.getCustomer().getCustomerID() + "," +
+                    res.getRoomType() + "," + res.getGroupSize() + "," + resIn + "," + resOut + "," + res.getActiveStatus() 
+                    + "," + res.getRoomNumber());
+
                     writer.newLine();
 
-                } // End if
+                }
 
-                // If ID does match, do not add this record to new csv file. Continue to next record
-                else continue;
+            }
 
-            } // End while
-
-            reader.close();
             writer.close();
-
-            oldFile.delete(); // Delete old csv file
-            newFile.renameTo(new File("CheckInn\\reservations.txt")); // Save new csv file
 
         } // End try
 
@@ -287,54 +285,31 @@ public class ReservationManager {
 
         try{
         
-            String line; // Store record
-            File oldFile = new File("CheckInn\\reservations.txt"); // Store old csv file
-            File newFile = new File("CheckInn\\temp.txt"); // Store new csv file
-            String checkIn = r.getCheckInDate().getMonthValue() + "/" + r.getCheckInDate().getDayOfMonth() + 
-                                "/" + r.getCheckInDate().getYear(); // Store reservation date
-            String checkOut = r.getCheckOutDate().getMonthValue() + "/" + r.getCheckOutDate().getDayOfMonth() + 
-                                "/" + r.getCheckOutDate().getYear(); // Store reservation date
-            BufferedReader reader = new BufferedReader(new FileReader(oldFile)); // Read csv file
-            BufferedWriter writer = new BufferedWriter(new FileWriter(newFile, true)); // Writer csv file
+            BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInn\\reservations.txt"));
 
-            // While loop reads and processes each individual line
-            while ((line = reader.readLine()) != null) {
+            for (int i = 0; i < reservation.size(); i++) {
 
-                // Split recprd into its attributes
-                String parts[] = line.split(",");
+                Reservation res = reservation.get(i);
 
-                // If reservation ID does not match the current records's ID, write this record into new 
-                // csv file unchanged.
-                if (r.getReservationID() != Long.parseLong(parts[0])) {
+                String resIn = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
+                + "-" + res.getCheckInDate().getDayOfMonth();
 
-                    writer.write(line); // Write line
-                    writer.newLine(); // Enter new line
+                String resOut = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
+                + "-" + res.getCheckInDate().getDayOfMonth();
 
-                } // End if
+                writer.write(res.getReservationID() + "," + res.getCustomer().getCustomerID() + "," +
+                res.getRoomType() + "," + res.getGroupSize() + "," + resIn + "," + resOut + "," + res.getActiveStatus() 
+                + "," + res.getRoomNumber());
 
-                // If they do match, add line with new status update
-                else {
+                writer.newLine();
 
-                    // Write updated record
-                    writer.write(r.getReservationID() + "," + r.getCustomer().getCustomerID() + "," + 
-                                    r.getRoomType() + "," + r.getGroupSize() + "," + checkIn + "," + 
-                                    checkOut + "," + r.getActiveStatus());
-                    // Enter new line
-                    writer.newLine();
+            }
 
-                } // End else
-
-            } // End while
-
-            oldFile.delete(); // Delete old file
-            newFile.renameTo(new File("CheckInn\\reservations.txt")); // Save new file
-
-            reader.close(); // Close reader
-            writer.close(); // Close writer
+            writer.close();
 
         } // End try
 
-        catch(Exception e) {System.out.println("u suck" + e.getMessage());}
+        catch(Exception e) {System.out.println("IO Error ResManager switch: " + e.getMessage());}
 
     } // End switchReservationStatus(r)
 

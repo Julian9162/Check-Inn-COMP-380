@@ -1,33 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.net.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@RoomStyle.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.RoomController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@RoomStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.bookRoomController">
    <top>
       <AnchorPane fx:id="topBar" onMouseDragged="#dragXY" onMousePressed="#setXY" prefHeight="56.0" prefWidth="600.0" styleClass="background" stylesheets="@RoomStyle.css" BorderPane.alignment="CENTER">
          <children>
-            <HBox alignment="CENTER_RIGHT" layoutX="436.0" layoutY="2.0" prefHeight="50.0" prefWidth="150.0">
-               <children>
-                  <Button mnemonicParsing="false" onAction="#close" text="X" />
-               </children>
-            </HBox>
-            <HBox layoutX="7.0" layoutY="14.0" prefHeight="44.0" prefWidth="135.0">
+            <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="40.0">
                <children>
                   <Label text="CheckInn | Book a Room">
                      <font>
                         <Font name="Corbel" size="14.0" />
                      </font>
                   </Label>
+                  <Pane prefWidth="415.0" />
+                  <Button mnemonicParsing="false" onAction="#close" text="X" />
                </children>
             </HBox>
          </children>
@@ -69,7 +68,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <GridPane prefHeight="168.0" prefWidth="600.0">
+            <GridPane fx:id="roomButtons" prefHeight="168.0" prefWidth="600.0">
                <columnConstraints>
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                   <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -80,7 +79,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="190.0" stylesheets="@RoomStyle.css" text="Single">
+                  <Button fx:id="singleButton" alignment="CENTER" mnemonicParsing="false" onAction="#single" prefHeight="41.0" prefWidth="190.0" stylesheets="@RoomStyle.css" text="Single">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -91,7 +90,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="190.0" text="Triple" GridPane.rowIndex="1">
+                  <Button fx:id="trippleButton" alignment="CENTER" mnemonicParsing="false" onAction="#triple" prefHeight="41.0" prefWidth="190.0" text="Triple" GridPane.rowIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -102,7 +101,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="190.0" text="Double" GridPane.columnIndex="1">
+                  <Button fx:id="doubleButton" alignment="CENTER" mnemonicParsing="false" onAction="#doubleRoom" prefHeight="41.0" prefWidth="190.0" text="Double" GridPane.columnIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -113,7 +112,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="190.0" text="Connected" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="connectedButton" alignment="CENTER" mnemonicParsing="false" onAction="#connected" prefHeight="41.0" prefWidth="190.0" text="Connected" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -124,7 +123,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="190.0" text="Suite" GridPane.rowIndex="2">
+                  <Button fx:id="suiteButton" alignment="CENTER" mnemonicParsing="false" onAction="#suite" prefHeight="41.0" prefWidth="190.0" text="Suite" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -135,7 +134,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="41.0" prefWidth="190.0" text="Penthouse" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="penthouseButton" alignment="CENTER" mnemonicParsing="false" onAction="#penthouse" prefHeight="41.0" prefWidth="190.0" text="Penthouse" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>

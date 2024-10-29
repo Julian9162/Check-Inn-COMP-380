@@ -78,4 +78,12 @@ public class employeeHomeController{
         stage.setScene(new Scene(root));
         stage.show();
     }
+
+    //update room availability button handler
+    public void updateRoom(ActionEvent event) throws IOException {
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("updateRoom.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

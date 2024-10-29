@@ -1,26 +1,29 @@
 package CheckInn;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import java.io.IOException;
-import javafx.event.*;
-import javafx.fxml.*;
-import javafx.scene.*;
-import javafx.scene.control.*;
-import javafx.scene.input.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
+import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
 
-public class RoomController {
+import java.io.IOException;
+
+public class CustInfoController{
     @FXML
-    private AnchorPane topBar;
+    private HBox topBar;
     @FXML
-    private DatePicker StartDate;
+    private TextField FullName;
     @FXML
-    private DatePicker EndDate;
+    private TextField Email;
+    @FXML
+    private TextField GroupSize;
     @FXML
     private Label loginLabel;
-
 
     private Stage stage;
     double x = 0, y = 0;
@@ -52,4 +55,13 @@ public class RoomController {
         stage.show();
     }
 
+    //submit info button handler
+    public void submitInfo(ActionEvent event) throws IOException {
+        CheckInnInterface.reserve = CheckInnInterface.resManager.createReservation(FullName.getText(),CheckInnInterface.type,Integer.parseInt(GroupSize.getText()),
+                                                        CheckInnInterface.checkin,CheckInnInterface.checkout,Email.getText());
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
 }

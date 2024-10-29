@@ -74,7 +74,7 @@ RoomNumber,RoomType,Availability,ReservationNumber
 173,Single,true,0
 174,Single,true,0
 175,Single,true,0
-176,Double,false,123456789123
+176,Double,true,0
 177,Double,true,0
 178,Double,true,0
 179,Double,true,0
@@ -298,4 +298,3 @@ RoomNumber,RoomType,Availability,ReservationNumber
 397,Penthouse,true,0
 398,Penthouse,true,0
 399,Penthouse,true,0
-

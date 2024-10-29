@@ -1,7 +1,6 @@
 package CheckInn;
 
 import java.io.File;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,6 +18,10 @@ public class CheckInnInterface extends Application {
     public static EmployeeManager empManager = new EmployeeManager();
     public static Reservation reserve;
     public static File file;
+    public static String type;
+    public static String room;
+    public static String checkin;
+    public static String checkout;
 
     public static void main(String[] args) {
         launch(args);

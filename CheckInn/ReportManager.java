@@ -44,7 +44,7 @@ public class ReportManager {
         try {
 
             // Saves name of today's report file
-            String fileName = "report_" + LocalDate.now().getMonthValue() + "_" + LocalDate.now().getDayOfMonth()
+            String fileName = "CheckInn\\reports\\report_" + LocalDate.now().getMonthValue() + "_" + LocalDate.now().getDayOfMonth()
                             + "_" + LocalDate.now().getYear() + ".txt";
 
             // Saves file of today's report

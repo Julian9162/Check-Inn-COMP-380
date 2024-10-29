@@ -14,10 +14,10 @@ public class ArchiveManager {
 
         // Local variables
         // checkIn and checkOut store reservation dates in string form
-        String checkIn = r.getCheckInDate().getMonthValue() + "/" + r.getCheckInDate().getDayOfMonth() + "/" +
-                        r.getCheckInDate().getYear();
-        String checkOut = r.getCheckOutDate().getMonthValue() + "/" + r.getCheckOutDate().getDayOfMonth() + "/" +
-                        r.getCheckOutDate().getYear();
+        String checkIn = r.getCheckInDate().getYear() + "-" + r.getCheckInDate().getMonthValue() + "-" +
+                        r.getCheckInDate().getDayOfMonth();
+        String checkOut = r.getCheckOutDate().getYear() + "-" + r.getCheckOutDate().getMonthValue() + "-" +
+                        r.getCheckOutDate().getDayOfMonth();
 
         BufferedWriter writer = new BufferedWriter(new FileWriter(archiveFile));
         writer.write(String.valueOf(r.getReservationID()));

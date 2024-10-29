@@ -83,6 +83,8 @@ public class EmployeeManager {
 
         }
 
+        CheckInnInterface.repManager.addEvent(r, r.getRoomNumber(), "Arrived");
+
     }
 
     public boolean checkOutCustomer(long reservationID) throws IOException {
@@ -92,7 +94,6 @@ public class EmployeeManager {
         Reservation r = CheckInnInterface.resManager.getReservation(reservationID);
 
         CheckInnInterface.roomManager.assignReservationNumber(r.getRoomNumber(), 0);
-        CheckInnInterface.roomManager.updateRoomAvailability(r.getRoomNumber(), true);
         CheckInnInterface.resManager.removeReservation(reservationID, 0);
 
         return true;
@@ -102,22 +103,19 @@ public class EmployeeManager {
     public void createNewReservation(String customerName, String roomType, int groupSize, String checkInDate, 
     String checkOutDate, String email) {
 
-        ReservationManager RM = new ReservationManager();
-        RM.createReservation(customerName, roomType, 0, checkInDate, checkOutDate, email);
+        CheckInnInterface.resManager.createReservation(customerName, roomType, 0, checkInDate, checkOutDate, email);
 
     }
 
     public void cancelReservation(long reservationID, int value) throws IOException {
 
-        ReservationManager RM = new ReservationManager();
-        RM.removeReservation(reservationID, value);
+        CheckInnInterface.resManager.removeReservation(reservationID, value);
 
     }
 
     public void changeRoomAvailability(String roomNumber, boolean availability) throws IOException{
 
-        RoomManager roomMan = new RoomManager();
-        roomMan.updateRoomAvailability(roomNumber, availability);
+        CheckInnInterface.roomManager.updateRoomAvailability(roomNumber, availability);
 
     }
 

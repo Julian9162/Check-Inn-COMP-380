@@ -28,14 +28,15 @@ public class Reservation {
         this.roomNumber = roomNumber;
 
         // Saves check in date into LocalDate object
-        String[] dateParts1 = checkInDate.split("/");
-        this.checkInDate = LocalDate.of(Integer.parseInt(dateParts1[2]), Integer.parseInt(dateParts1[0]), 
-                                        Integer.parseInt(dateParts1[1]));
+        String[] dateParts1 = checkInDate.split("-", 3);
+        
+        this.checkInDate = LocalDate.of(Integer.parseInt(dateParts1[0]), Integer.parseInt(dateParts1[1]), 
+                                        Integer.parseInt(dateParts1[2]));
 
         // Saves check out date into LocalDate object
-        String[] dateParts2 = checkOutDate.split("/");
-        this.checkOutDate = LocalDate.of(Integer.parseInt(dateParts2[2]), Integer.parseInt(dateParts2[0]), 
-                                        Integer.parseInt(dateParts2[1]));
+        String[] dateParts2 = checkOutDate.split("-", 3); 
+        this.checkOutDate = LocalDate.of(Integer.parseInt(dateParts2[0]), Integer.parseInt(dateParts2[1]), 
+                                        Integer.parseInt(dateParts2[2]));
 
     } // End Reservation(reservationID, customer, roomType, groupSize, checkInDate, checkOutDate) constructor
 

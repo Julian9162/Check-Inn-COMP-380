@@ -1,26 +1,26 @@
-package checkinn.confirmbook;
-
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+package CheckInn;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ConfirmBookControl {
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+
+public class updatedRoomController implements Initializable{
     @FXML
-    private AnchorPane topBar;
-
+    private Button closeButton;
     @FXML
-    private Label DateLabel;
+    private Label reservationLabel;
+    @FXML
+    private HBox topBar;
 
-
+    private String roomNumber;
     private Stage stage;
     double x = 0, y = 0;
 
@@ -46,9 +46,17 @@ public class ConfirmBookControl {
     //home button handler
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("ConfirmBook.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("employeeHome.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
     }
 
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        //Initialize variables
+        roomNumber = CheckInnInterface.room;
+
+        //Initialize page
+        reservationLabel.setText("Room " + roomNumber + " has been updated");
+    }
 }
