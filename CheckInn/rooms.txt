@@ -1,4 +1,3 @@
-RoomNumber,RoomType,Availability
 101,Single,true
 102,Single,true
 103,Single,true
@@ -298,4 +297,3 @@ RoomNumber,RoomType,Availability
 397,Penthouse,true
 398,Penthouse,true
 399,Penthouse,true
-400,Penthouse,true
