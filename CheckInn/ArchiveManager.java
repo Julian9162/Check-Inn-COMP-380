@@ -5,20 +5,32 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
 
+/**
+ * ArchiveManager --- Program to add completed or cancelled reservations to a storage file for viewing
+ * @author            Brian Diaz
+ */
 public class ArchiveManager {
-    public File archiveFile = new File("CheckInn\\archive.txt");
-    public ArchiveManager() {}
+    
+    private File archiveFile = new File("CheckInn\\archive.txt"); // Stores archive csv file
+    
+    public ArchiveManager() {} // Empty constructor
 
-    // Method to write removed Reservation into txt file "archive.txt"
+    /**
+     * Adds a reservation to the archive file
+     * @param r A reservation object to be added to archive file
+     * @param value An integer value indicating case in which reservation was finished
+     * @exception Error writing to archive csv file
+     * @ return No return value
+     */
     public void addToArchive(Reservation r, String value) throws IOException {
 
-        // Local variables
-        // checkIn and checkOut store reservation dates in string form
+        // Stores reservation check in/out dates
         String checkIn = r.getCheckInDate().getYear() + "-" + r.getCheckInDate().getMonthValue() + "-" +
                         r.getCheckInDate().getDayOfMonth();
         String checkOut = r.getCheckOutDate().getYear() + "-" + r.getCheckOutDate().getMonthValue() + "-" +
                         r.getCheckOutDate().getDayOfMonth();
 
+        // Write reservation information to archive file
         BufferedWriter writer = new BufferedWriter(new FileWriter(archiveFile));
         writer.write(String.valueOf(r.getReservationID()));
         writer.write("," + r.getCustomer().getCustomerID());
@@ -28,36 +40,55 @@ public class ArchiveManager {
         writer.write("," + r.getRoomNumber()); 
         writer.write("," + value);
         writer.newLine();
-        writer.close();
-    }
-
-
-    public Reservation getPastReservation(Long reservationID) {
-    String filePath = ("CheckInn\\archive.txt");
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
-        String line;
+        writer.close(); 
         
-        while ((line = reader.readLine()) != null) {
-            String [] parts = line.split(",");
+    } // End addToArchive(r, value)
 
+    /**
+     * Retreives a desired reservation in archive file
+     * @param reservationID An identification number for the reservation object
+     * @exception Desired reservation does not exist
+     * @exception Error reading archive csv file
+     * @return Returns desired reservation object
+     */
+    public Reservation getPastReservation(Long reservationID) {
+
+        String filePath = ("CheckInn\\archive.txt"); // Store archive file path
+
+    // Read archive file
+    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        
+        String line; // Store record
+
+        // While loop iterates while there is a record to be read
+        // Ends after desired reservation is located
+        while ((line = reader.readLine()) != null) {
+            
+            String[] parts = line.split(","); // Stores parts of record
+
+            // Conditition checks if reservation ID in current record matches desired
+            // reservation number.
+            // If true, return desired reservation
             if (Long.parseLong(parts[0]) == reservationID) {
+                // Save customer information 
                 Customer c = CheckInnInterface.cusManager.getCustomer(Integer.parseInt(parts[1]));
+                // Return reservation with corresponding information
                 return new Reservation(reservationID, c, parts[2], 
                 Integer.parseInt(parts[3]), parts[4], parts[5], false, parts[6]);
-            }
-        }
+            } // End if
+            
+        } // End while
 
-        return null;
-    }
+        return null; // Return null if reservation does not exist
+        
+    } // End try
 
+    // Any errors reading archive file
     catch (IOException e) {
-        System.out.println("Error Reading FIle: " + e.getMessage());
-
-        return null;
-    }
+        System.out.println("Error Reading File: " + e.getMessage()); // Display error message
+        return null; // Return null
+    } // End catch
     
+    } // End getPastReservation(reservationID)
 
-    }
-
-
-}
+} // End ArchiveManager class
