@@ -10,7 +10,6 @@ import java.io.File;
 
 public class EmployeeManager {
     
-
     private LinkedList<Employee> employee = new LinkedList<Employee>();
     private ArrayList<Integer> employeeUser = new ArrayList<Integer>(); 
 

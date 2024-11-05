@@ -133,13 +133,6 @@ public class ReservationManager {
     // addToReservationFile() method adds newly created reservation object to reservation csv file.
     public void addToReservationFile(Reservation r) throws Exception {
 
-        // Local variables
-        // checkIn and checkOut store reservation dates in string form
-        String checkIn = r.getCheckInDate().getYear() + "-" + r.getCheckInDate().getMonthValue() + "-" +
-                        r.getCheckInDate().getDayOfMonth();
-        String checkOut = r.getCheckOutDate().getYear() + "-" + r.getCheckOutDate().getMonthValue() + "-" +
-                        r.getCheckOutDate().getDayOfMonth();
-
         // Writes lines to end of reservation list file
         BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInn\\reservations.txt", true));
 
@@ -147,7 +140,7 @@ public class ReservationManager {
         // CheckOutDate, ActiveStatus
         
         writer.write(r.getReservationID() + "," + r.getCustomer().getCustomerID() + "," + r.getRoomType() + "," 
-                        + r.getGroupSize() + "," + checkIn + "," + checkOut + "," + r.getActiveStatus() + "," + r.getRoomNumber());
+                        + r.getGroupSize() + "," + r.getCheckInDateStr() + "," + r.getCheckOutDateStr() + "," + r.getActiveStatus() + "," + r.getRoomNumber());
         writer.newLine(); // Create new line
         writer.close(); // Close BufferedWriter
 
@@ -209,14 +202,9 @@ public class ReservationManager {
 
                 if (res.getReservationID() != r.getReservationID()) {
 
-                    String resIn = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
-                    + "-" + res.getCheckInDate().getDayOfMonth();
-
-                    String resOut = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
-                    + "-" + res.getCheckInDate().getDayOfMonth();
-
                     writer.write(res.getReservationID() + "," + res.getCustomer().getCustomerID() + "," +
-                    res.getRoomType() + "," + res.getGroupSize() + "," + resIn + "," + resOut + "," + res.getActiveStatus() 
+                    res.getRoomType() + "," + res.getGroupSize() + "," + res.getCheckInDateStr() + "," + 
+                    res.getCheckOutDateStr() + "," + res.getActiveStatus() 
                     + "," + res.getRoomNumber());
 
                     writer.newLine();
@@ -289,14 +277,9 @@ public class ReservationManager {
 
                 Reservation res = reservation.get(i);
 
-                String resIn = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
-                + "-" + res.getCheckInDate().getDayOfMonth();
-
-                String resOut = res.getCheckInDate().getYear() + "-" + res.getCheckInDate().getMonthValue()
-                + "-" + res.getCheckInDate().getDayOfMonth();
-
                 writer.write(res.getReservationID() + "," + res.getCustomer().getCustomerID() + "," +
-                res.getRoomType() + "," + res.getGroupSize() + "," + resIn + "," + resOut + "," + res.getActiveStatus() 
+                res.getRoomType() + "," + res.getGroupSize() + "," + res.getCheckInDateStr() + "," + 
+                res.getCheckOutDateStr() + "," + res.getActiveStatus() 
                 + "," + res.getRoomNumber());
 
                 writer.newLine();
@@ -310,5 +293,51 @@ public class ReservationManager {
         catch(Exception e) {System.out.println("IO Error ResManager switch: " + e.getMessage());}
 
     } // End switchReservationStatus(r)
+
+    public void editRoomType(long reservationID, String roomType) {
+        
+        Reservation r = getReservation(reservationID);
+
+        if (r == null) {
+            System.out.println("Reservation not found");
+            return;
+        }
+
+        r.setRoomType(roomType);
+    }
+
+    public void editGroupSize(long reservationID, int groupSize) {
+
+        Reservation r = getReservation(reservationID);
+        if (r == null) {
+            System.out.println("Reservation not found");
+            return;
+        }
+        
+        r.setGroupSize(groupSize);
+
+    }
+
+    public void editCheckInDate(long reservationID, String checkIn) {
+        Reservation r = getReservation(reservationID);
+        if (r == null) {
+            System.out.println("Reservation not found");
+            return;
+        }
+        r.setCheckInDate(checkIn);
+        
+    }
+
+    public void editCheckOutDate(long reservationID, String checkOut) {
+        Reservation r = getReservation(reservationID);
+        if (r == null) {
+            System.out.println("Reservation not found");
+            return;
+        }
+        
+        r.setCheckOutDate(checkOut);
+    }
+
+
 
 } // End ReservationManager class

@@ -135,6 +135,7 @@ public class bookRoomController implements Initializable{
         stage.show();
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         roomButtons.getChildren().clear();

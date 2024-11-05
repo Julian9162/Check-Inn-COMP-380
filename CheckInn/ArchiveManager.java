@@ -24,19 +24,13 @@ public class ArchiveManager {
      */
     public void addToArchive(Reservation r, String value) throws IOException {
 
-        // Stores reservation check in/out dates
-        String checkIn = r.getCheckInDate().getYear() + "-" + r.getCheckInDate().getMonthValue() + "-" +
-                        r.getCheckInDate().getDayOfMonth();
-        String checkOut = r.getCheckOutDate().getYear() + "-" + r.getCheckOutDate().getMonthValue() + "-" +
-                        r.getCheckOutDate().getDayOfMonth();
-
         // Write reservation information to archive file
         BufferedWriter writer = new BufferedWriter(new FileWriter(archiveFile));
         writer.write(String.valueOf(r.getReservationID()));
         writer.write("," + r.getCustomer().getCustomerID());
         writer.write("," + r.getRoomType());
         writer.write("," + r.getGroupSize());
-        writer.write("," + checkIn + "," + checkOut);
+        writer.write("," + r.getCheckInDateStr() + "," + r.getCheckOutDateStr());
         writer.write("," + r.getRoomNumber()); 
         writer.write("," + value);
         writer.newLine();

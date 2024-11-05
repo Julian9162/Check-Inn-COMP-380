@@ -60,14 +60,24 @@ public class Reservation {
         return groupSize;
     } // End getGroupSize()
 
-    // getCheckInDate() returns date for checking in
+    //getCheckInDate() returns date for checking in
     public LocalDate getCheckInDate() {
         return checkInDate;
     } // End getCheckInDate()
 
-    // getCheckOutDate() returns date for checking out
+    //getCheckOutDate() returns date for checking in
     public LocalDate getCheckOutDate() {
-        return checkOutDate; 
+        return checkOutDate;
+    } // End getCheckOutDate()
+
+    // getCheckInDate() returns date for checking in
+    public String getCheckInDateStr() {
+        return checkInDate.getYear() + "-" + checkInDate.getMonthValue() + "-" + checkInDate.getDayOfMonth();
+    } // End getCheckInDate()
+
+    // getCheckOutDate() returns date for checking out
+    public String getCheckOutDateStr() {
+        return checkOutDate.getYear() + "-" + checkOutDate.getMonthValue() + "-" + checkOutDate.getDayOfMonth();
     } // End getCheckOutDate()
 
     // getReservationID() returns identification number of this reservation
@@ -86,6 +96,32 @@ public class Reservation {
 
     public String getRoomNumber() {
         return roomNumber;
+    }
+
+    public void setGroupSize(int groupSize) {
+        this.groupSize = groupSize;
+    }
+    
+    public void setRoomType(String roomType) {
+        this.roomType = roomType;
+    }
+
+    public void setCheckInDate(String checkInDate) {
+
+        String[] dateParts = checkInDate.split("-", 3);
+        
+        this.checkInDate = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), 
+                                        Integer.parseInt(dateParts[2]));
+
+    }
+
+    public void setCheckOutDate(String checkOutDate) {
+
+        String[] dateParts = checkOutDate.split("-", 3);
+        
+        this.checkOutDate = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), 
+                                        Integer.parseInt(dateParts[2]));
+
     }
 
 } // End Reservation class
