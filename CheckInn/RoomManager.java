@@ -1,6 +1,7 @@
 package CheckInn;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -47,24 +48,6 @@ public class RoomManager {
     public boolean verifyDateAvailability(String checkIn, String checkOut) {
     
         // Date Format: Year - Month - Day
-<<<<<<< HEAD
-        String[] parts1 = checkIn.split("-");
-        String[] parts2 = checkOut.split("-");
-        // [2024, 12, 1]
-
-        int[] inDate = new int[3];
-        int[] outDate = new int[3];
-
-        for (int i = 0; i < 3; i++) {
-
-            inDate[i] = Integer.parseInt(parts1[i]);
-            outDate[i] = Integer.parseInt(parts2[i]);
-
-        } 
-        
-        if 
-        
-=======
         String[] inDate = checkIn.split("-");
         String[] outDate = checkOut.split("-");
 
@@ -77,7 +60,7 @@ public class RoomManager {
 	}
         
 	LocalDate desiredCheckIn = LocalDate.of(in[0],in[1],in[2]);
-	LocalDate desiredCheckout = LocalDate.of(out[0],out[1],out[2]);
+	LocalDate desiredCheckOut = LocalDate.of(out[0],out[1],out[2]);
         
 	// Checking to see if the desired check out date is after the desired check in date
 	if (!desiredCheckOut.isAfter(desiredCheckIn)) {
@@ -96,7 +79,6 @@ public class RoomManager {
 	}
 
 	return true; //No overlapping reservations
->>>>>>> a8debf5cbc72ba0751893e5ac2de7a81fd542c68
     }
     
     public void updateRoomAvailability(String roomNumber, boolean availability) throws IOException{

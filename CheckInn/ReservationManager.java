@@ -285,7 +285,7 @@ public class ReservationManager {
 
     }
 
-    public String editReservation(long reservationID, String roomType, int groupSize
+    public String editReservation(long reservationID, String roomType, int groupSize,
                                     String checkIn, String checkOut) {
 
         Reservation r = getReservation(reservationID);
