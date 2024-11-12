@@ -47,6 +47,7 @@ public class RoomManager {
     public boolean verifyDateAvailability(String checkIn, String checkOut) {
     
         // Date Format: Year - Month - Day
+<<<<<<< HEAD
         String[] parts1 = checkIn.split("-");
         String[] parts2 = checkOut.split("-");
         // [2024, 12, 1]
@@ -63,6 +64,39 @@ public class RoomManager {
         
         if 
         
+=======
+        String[] inDate = checkIn.split("-");
+        String[] outDate = checkOut.split("-");
+
+        int[] in = new int[3];
+        int[] out = new int[3];
+
+        for (int i = 0; i < 3) {
+		in[i] = Integer.parseInt(inDate[i]);
+		out[i] = Integer.parseInt(outDate[i]);
+	}
+        
+	LocalDate desiredCheckIn = LocalDate.of(in[0],in[1],in[2]);
+	LocalDate desiredCheckout = LocalDate.of(out[0],out[1],out[2]);
+        
+	// Checking to see if the desired check out date is after the desired check in date
+	if (!desiredCheckOut.isAfter(desiredCheckIn)) {
+		System.out.println("Check out date must be after check in date");
+		return false;
+	}
+        
+	// Checking for overlapping reservations
+	for (//go through reservations) {
+		// Checks to see if the reservation dates overlap with the desired dates
+		// First cond: Desired reservation check out date is before existing reservations check indate
+		// Second cond: Desired reservation check in date is after existing reservations check outdate
+		if (!(desiredCheckOut.isBefore(r.getCheckInDate()) || desiredCheckIn.isAfter(r.getCheckOutDate()))) {
+			return false; // Date overlap found
+		}
+	}
+
+	return true; //No overlapping reservations
+>>>>>>> a8debf5cbc72ba0751893e5ac2de7a81fd542c68
     }
     
     public void updateRoomAvailability(String roomNumber, boolean availability) throws IOException{
