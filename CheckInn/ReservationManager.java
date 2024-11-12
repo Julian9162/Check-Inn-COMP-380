@@ -1,11 +1,6 @@
 package CheckInn;
 
-import java.io.File;
 import java.io.*;
-import java.io.FileWriter;
-import java.io.FileReader;
-import java.io.BufferedWriter;
-import java.io.BufferedReader;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ArrayList;
@@ -262,12 +257,8 @@ public class ReservationManager {
         delete(index); // Remove reservation from linked list and array list
 
     } // End removeReservation(reservationNumber, value)
-    
-    // switchReservationStatus changes status of reservation and edits csv file to reflect change
-    public void switchReservationStatus(Reservation r) {
 
-        // Change reservation status
-        r.switchActiveStatus();
+    public void modifyReservationFile() {
 
         try{
         
@@ -292,6 +283,29 @@ public class ReservationManager {
 
         catch(Exception e) {System.out.println("IO Error ResManager switch: " + e.getMessage());}
 
+    }
+
+    public String editReservation(long reservationID, String roomType, int groupSize
+                                    String checkIn, String checkOut) {
+
+        Reservation r = getReservation(reservationID);
+
+        if (r != null) {
+
+            
+
+        }
+
+    }
+    
+    // switchReservationStatus changes status of reservation and edits csv file to reflect change
+    public void switchReservationStatus(Reservation r) {
+        
+        // Change reservation status
+        if (r != null) r.switchActiveStatus();
+
+        modifyReservationFile();
+
     } // End switchReservationStatus(r)
 
     public void editRoomType(long reservationID, String roomType) {
@@ -304,6 +318,8 @@ public class ReservationManager {
         }
 
         r.setRoomType(roomType);
+        modifyReservationFile();
+        
     }
 
     public void editGroupSize(long reservationID, int groupSize) {
@@ -315,6 +331,7 @@ public class ReservationManager {
         }
         
         r.setGroupSize(groupSize);
+        modifyReservationFile();
 
     }
 
@@ -325,10 +342,13 @@ public class ReservationManager {
             return;
         }
         r.setCheckInDate(checkIn);
+
+        modifyReservationFile();
         
     }
 
     public void editCheckOutDate(long reservationID, String checkOut) {
+
         Reservation r = getReservation(reservationID);
         if (r == null) {
             System.out.println("Reservation not found");
@@ -336,6 +356,7 @@ public class ReservationManager {
         }
         
         r.setCheckOutDate(checkOut);
+        modifyReservationFile();
     }
 
 

@@ -44,6 +44,27 @@ public class RoomManager {
 
     }
 
+    public boolean verifyDateAvailability(String checkIn, String checkOut) {
+    
+        // Date Format: Year - Month - Day
+        String[] parts1 = checkIn.split("-");
+        String[] parts2 = checkOut.split("-");
+        // [2024, 12, 1]
+
+        int[] inDate = new int[3];
+        int[] outDate = new int[3];
+
+        for (int i = 0; i < 3; i++) {
+
+            inDate[i] = Integer.parseInt(parts1[i]);
+            outDate[i] = Integer.parseInt(parts2[i]);
+
+        } 
+        
+        if 
+        
+    }
+    
     public void updateRoomAvailability(String roomNumber, boolean availability) throws IOException{
         List<String[]> rooms = getAllRooms(); 
 

@@ -12,7 +12,7 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
-public class reviewController implements Initializable{
+public class editController implements Initializable{
     @FXML
     private Label checkInDate;
     @FXML
@@ -66,18 +66,10 @@ public class reviewController implements Initializable{
         stage.show();
     }
 
-    //cancel button handler
-    public void cancelReserve(ActionEvent event) throws IOException {
-        stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("cancel.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();        
-    }
-
-    //edit button handler
+    //submit button handler
     public void editReserve(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("edit.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
         stage.setScene(new Scene(root));
         stage.show();        
     }
@@ -86,19 +78,8 @@ public class reviewController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables
         reservationNumber = CheckInnInterface.reserve.getReservationID();
-        checkIn = CheckInnInterface.reserve.getCheckInDate().getMonthValue() + "/" + 
-                    CheckInnInterface.reserve.getCheckInDate().getDayOfMonth() + "/" + CheckInnInterface.reserve.getCheckInDate().getYear();
-        checkOut = CheckInnInterface.reserve.getCheckOutDate().getMonthValue() + "/" + 
-                    CheckInnInterface.reserve.getCheckOutDate().getDayOfMonth() + "/" + CheckInnInterface.reserve.getCheckOutDate().getYear();
-        type = CheckInnInterface.reserve.getRoomType();
-        size = CheckInnInterface.reserve.getGroupSize();
-        name = CheckInnInterface.reserve.getCustomer().getFirstName();
 
         //Initialize page
-        reservationLabel.setText("Reservation: " + reservationNumber + " for " + name);
-        roomType.setText(type);
-        groupSize.setText(Integer.toString(size));
-        checkInDate.setText(checkIn);
-        checkOutDate.setText(checkOut);
+        reservationLabel.setText("Editing Reservation: " + reservationNumber + " for " + name);
     }
 }
