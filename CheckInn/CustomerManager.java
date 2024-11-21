@@ -8,21 +8,27 @@ import java.io.BufferedReader;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
-// CustomerManager class is controller class for customer entities
+/**
+ * CustomerManager --- Controller class that manages creation, storage, and access of customer entities.
+ * @author             Julian Aguiar
+ */
 public class CustomerManager {
 
-    // Local variables
-    private LinkedList<Customer> customer = new LinkedList<Customer>(); //Data structure used to store customer objects
-    private ArrayList<Integer> customerID = new ArrayList<Integer>(); // Data structure used to store customer ID numbers
-    private ArrayList<String> customerEmail = new ArrayList<String>(); // Data structure used store customer emails
+    // Global variables
+    private LinkedList<Customer> customer = new LinkedList<Customer>(); // Linked List used to store customer objects
+    private ArrayList<Integer> customerID = new ArrayList<Integer>(); // Array list used to store customer ID numbers
+    private ArrayList<String> customerEmail = new ArrayList<String>(); // Array list used store customer emails
 
-    // CustomerManager constructor that loads customer data stored in customer.txt csv file 
-    // to customer object data structure when called
+    /**
+     * Class constructor loads all customer records from customer.txt csv file into customer object linked list and arrays
+     * @exception  Error reading from customer csv file
+     * @return     No return value
+     */
     public CustomerManager() {
 
         try {
 
-            // Variables
+            // Local variables
             String line; // Stores a line in customer list file
             File file = new File("CheckInn\\customers.txt"); // Stores customer list file
             BufferedReader reader = new BufferedReader(new FileReader(file)); // Reads lines from customer list file
@@ -49,12 +55,18 @@ public class CustomerManager {
 
         // Error reading from customer file
         catch(Exception e) {
-            System.out.println("I/O Error CustomerManager " + e.getMessage());
+            System.out.println("I/O Error in CustomerManager constructor: " + e.getMessage());
         } // End catch
  
     } // End CustomerManager constructor
 
-    // generateID() method will create new 7-digit identification number for new customer
+    /**
+     * Creates a unique 7-digit ID number for a new customer being added to customer csv file
+     * @param first  First name of the customer
+     * @param last   Last name of the customer
+     * @exception    none
+     * @return       Returns newly generated customer ID
+     */
     private int generateID(String first, String last) {
 
         // Local variables
@@ -76,7 +88,12 @@ public class CustomerManager {
 
     } // End generateID(first, last) method
 
-    // addToCustFile() method will add new customer object to customer list file
+    /**
+     * Adds new customer to customer.txt csv file
+     * @param c    A customer object containing information on a new customer to be added to customer csv file
+     * @exception  No exception
+     * @return     none
+     */
     private void addToCustFile(Customer c) throws Exception {
 
         // Writes lines to end of customer list file
@@ -88,8 +105,12 @@ public class CustomerManager {
 
     } // End addToCustFile(c)
 
-    // getCustomer(targetID) method searches and returns desired customer object by using target customer 
-    // identification number. Returns null if customer does not exist.
+    /**
+     * Retreives an existing customer object from customer linked list by using the customer's ID number.
+     * @param targetID  The customer ID to be searched in customer ID array for retreival of desired customer.
+     * @exception       Customer ID does not exist
+     * @return          Returns desired customer object
+     */
     public Customer getCustomer(int targetID) {
 
         int index = customerID.indexOf(targetID); // Saves index of targetID in customerID array
@@ -102,8 +123,15 @@ public class CustomerManager {
         
     } // End getCustomer(targetID)
 
-    // getCustomer(first, last, targetEmail) method searches and returns desired customer object by using target
-    // customer email. Creates and returns new customer object if customer does not already exist.
+    /**
+     * Retreives an existing customer object from customer linked list using customers email address OR
+     * creates new customer object if customer does not exist.
+     * @param first        The first name of the customer
+     * @param last         The last name of the customer
+     * @param targetEmail  The email of the desired customer
+     * @exception          No exception
+     * @return             Returns desired customer object or newly created customer object
+     */
     public Customer getCustomer(String first, String last, String targetEmail) {
 
         int index = customerEmail.indexOf(targetEmail); // Saves index of emailID in customerEmail array
