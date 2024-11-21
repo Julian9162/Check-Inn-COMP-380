@@ -17,10 +17,10 @@ public class ArchiveManager {
 
     /**
      * Adds a reservation to the archive file
-     * @param r A reservation object to be added to archive file
-     * @param value An integer value indicating case in which reservation was finished
-     * @exception Error writing to archive csv file
-     * @ return No return value
+     * @param r      A reservation object to be added to archive file
+     * @param value  An integer value indicating case in which reservation was finished
+     * @exception    Error writing to archive csv file
+     * @return       No return value
      */
     public void addToArchive(Reservation r, String value) throws IOException {
 
@@ -40,10 +40,10 @@ public class ArchiveManager {
 
     /**
      * Retreives a desired reservation in archive file
-     * @param reservationID An identification number for the reservation object
-     * @exception Desired reservation does not exist
-     * @exception Error reading archive csv file
-     * @return Returns desired reservation object
+     * @param reservationID  An identification number for the reservation object
+     * @exception            Desired reservation does not exist
+     * @exception            Error reading archive csv file
+     * @return               Returns desired reservation object
      */
     public Reservation getPastReservation(Long reservationID) {
 
