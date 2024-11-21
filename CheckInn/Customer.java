@@ -1,6 +1,9 @@
 package CheckInn;
 
-// Class for customer entity
+/**
+ * Customer ---- Entity class for representing a customer
+ * @author       Julian Aguiar
+ */
 public class Customer {
 
     // Global variables
@@ -8,7 +11,15 @@ public class Customer {
     private String email; // Email of customer
     private int customerID; // Identification Number of customer
 
-    // Customer constructor that creates customer object based off existing customer data
+    /**
+     * Customer entity constuctor saves a specific customer's information in object
+     * @param customerID  The identification number of the customer
+     * @param email       The email address of the customer
+     * @param last        The last name of the customer
+     * @param first       The first name of the customer
+     * @exception         none
+     * @return            none
+     */
     Customer(int customerID, String email, String last, String first) {
 
         // Saves first and last name + customer email + customer identification number
@@ -19,22 +30,38 @@ public class Customer {
         
     } // End Customer(first, last, email, customerID) constructor
 
-    // getFirstName() returns first name of customer
+    /**
+     * Retreives first name of customer
+     * @exception  none
+     * @return     first name
+     */ 
     public String getFirstName() {
         return first;
     } // End getFirstName()
 
-    // getLastName() returns first name of customer
+    /**
+     * Retreives last name of customer
+     * @exception  none
+     * @return     last name
+     */ 
     public String getLastName() {
         return last;
     } // End getLastName()
 
-    // getFirstName() returns email of customer
+    /**
+     * Retreives email address of customer
+     * @exception  none
+     * @return     email address
+     */     
     public String getEmail() {
         return email;
     } // End getEmail()
 
-    // getFirstName() returns identification number of customer
+    /**
+     * Retreives ID number of customer
+     * @exception  none
+     * @return     ID number
+     */ 
     public int getCustomerID() {
         return customerID;
     } // End getCustomerID()
