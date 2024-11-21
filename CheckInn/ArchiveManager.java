@@ -49,39 +49,41 @@ public class ArchiveManager {
 
         String filePath = ("CheckInn\\archive.txt"); // Store archive file path
 
-    // Read archive file
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
+        // Read archive file
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
         
-        String line; // Store record
+            String line; // Store record
 
-        // While loop iterates while there is a record to be read
-        // Ends after desired reservation is located
-        while ((line = reader.readLine()) != null) {
+            // While loop iterates while there is a record to be read
+            // Ends after desired reservation is located
+            while ((line = reader.readLine()) != null) {
             
-            String[] parts = line.split(","); // Stores parts of record
+                String[] parts = line.split(","); // Stores parts of record
 
-            // Conditition checks if reservation ID in current record matches desired
-            // reservation number.
-            // If true, return desired reservation
-            if (Long.parseLong(parts[0]) == reservationID) {
-                // Save customer information 
-                Customer c = CheckInnInterface.cusManager.getCustomer(Integer.parseInt(parts[1]));
-                // Return reservation with corresponding information
-                return new Reservation(reservationID, c, parts[2], 
-                Integer.parseInt(parts[3]), parts[4], parts[5], false, parts[6]);
-            } // End if
+                // Conditition checks if reservation ID in current record matches desired
+                // reservation number.
+                // If true, return desired reservation
+                if (Long.parseLong(parts[0]) == reservationID) {
+                    // Save customer information 
+                    Customer c = CheckInnInterface.cusManager.getCustomer(Integer.parseInt(parts[1]));
+                    // Return reservation with corresponding information
+                    return new Reservation(reservationID, c, parts[2], 
+                    Integer.parseInt(parts[3]), parts[4], parts[5], false, parts[6]);
+                } // End if
             
-        } // End while
+            } // End while
+            
+            return null; // Return null if reservation does not exist
+            
+        } // End try
 
-        return null; // Return null if reservation does not exist
-        
-    } // End try
-
-    // Any errors reading archive file
-    catch (IOException e) {
-        System.out.println("Error Reading File: " + e.getMessage()); // Display error message
-        return null; // Return null
-    } // End catch
+        // Any errors reading archive file
+        catch (IOException e) {
+            
+            System.out.println("Error Reading File: " + e.getMessage()); // Display error message
+            return null; // Return null
+            
+        } // End catch
     
     } // End getPastReservation(reservationID)
 
