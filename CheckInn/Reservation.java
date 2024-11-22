@@ -2,7 +2,13 @@ package CheckInn;
 
 import java.time.LocalDate;
 
-// Reservation class used to store reservation objects
+ /**
+ * Reservation --- This class is used to store and manage individual reservation objects. It representings a booking in
+ * the system, storing details such as room type, group size, reservation dates etc. 
+ * @authors            Julian Aguiar and Brian Diaz
+ */
+
+
 public class Reservation {
     
     // Global variables
