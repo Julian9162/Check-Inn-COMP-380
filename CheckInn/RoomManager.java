@@ -75,6 +75,7 @@ public class RoomManager {
      * @param     checkOut The desired check out date
      * @return	  true if the dates are valid and do not overlap with existing reservations
      */
+    /**
     public boolean verifyDateAvailability(String checkIn, String checkOut) {
     
         // Date Format: Year - Month - Day
@@ -112,6 +113,7 @@ public class RoomManager {
 
 	return true; //No overlapping reservations
     }
+     **/
 	
      /**
      *  Updates the availability status of a specified room in the room file. 
