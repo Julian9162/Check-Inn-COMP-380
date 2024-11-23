@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Scanner;
 
 /**
- * ArchiveManager --- Program that manages all room operations such as assigning a reservation number to 
+ * RoomManager --- Program that manages all room operations such as assigning a reservation number to 
  * a room, updating and verifying the availability of a room. 
  * @author            Brian Diaz
  */
