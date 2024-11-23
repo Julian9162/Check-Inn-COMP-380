@@ -5,12 +5,12 @@ import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.ArrayList;
 
+ /**
+ * ReservationManager --- This class manages all reservations for the hotel, allows user operations such as creating, cancelling, and reviewing reservations. Manages the reservation 
+ * list csv file, and stores all current and upcoming reservations in a linked list. 
+ * @authors        Julian Aguiar and Brian Diaz
+ */
 
-// ReservationManager class manages all reservations for hotel.
-// Allows user to create, cancel, and review reservations.
-// Manages the reservation list csv file. This includes adding a new row, deleting
-// a row, and changing reservation status.
-// Stores all current and upcoming reservations in a linked list.
 public class ReservationManager {
 
     // Global variables
