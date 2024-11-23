@@ -13,6 +13,8 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+// Controller class for the Customer Information page taking in their name and email
+
 public class CustInfoController{
     @FXML
     private HBox topBar;
