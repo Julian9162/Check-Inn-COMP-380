@@ -390,7 +390,12 @@ public class ReservationManager {
 		System.out.println("Check out date must be after check in date");
 		return false; 
 	}
-        
+
+	// Existing from Dec 5th to the 8th 
+    	// Desired from Dec6th to Dec 9th
+
+    	//Dec9.isBefore(Dec5) -> false
+    	//Dec6.isAfter(Dec8) -> false
 	// Checking for overlapping reservations
 	for (//go through reservations) {
 		// Checks to see if the desired reservation dates overlap with the existing reservation dates 
