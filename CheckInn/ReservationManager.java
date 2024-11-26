@@ -359,6 +359,51 @@ public class ReservationManager {
         modifyReservationFile();
     }
 
+   /**
+     *  Verifies the availability of dates for a new reservation 
+     * @param     checkIn  The desired check in date
+     * @param     checkOut The desired check out date
+     * @return	  true if the dates are valid and do not overlap with existing reservations
+     */
+    /**
+    public boolean verifyDateAvailability(String checkIn, String checkOut) {
+    
+        // Date Format: Year - Month - Day
+        String[] inDate = checkIn.split("-");
+        String[] outDate = checkOut.split("-");
+
+	// Convert the string into integers
+        int[] in = new int[3];
+        int[] out = new int[3];
+
+        for (int i = 0; i < 3) {
+		in[i] = Integer.parseInt(inDate[i]);
+		out[i] = Integer.parseInt(outDate[i]);
+	}
+
+	// Create localDate objects for the desired check in and check out date
+	LocalDate desiredCheckIn = LocalDate.of(in[0],in[1],in[2]);
+	LocalDate desiredCheckOut = LocalDate.of(out[0],out[1],out[2]);
+        
+	// Checking to see if the desired check out date is after the desired check in date
+	if (!desiredCheckOut.isAfter(desiredCheckIn)) {
+		System.out.println("Check out date must be after check in date");
+		return false; 
+	}
+        
+	// Checking for overlapping reservations
+	for (//go through reservations) {
+		// Checks to see if the desired reservation dates overlap with the existing reservation dates 
+		// First cond: Desired reservation check out date is before existing reservations check indate
+		// Second cond: Desired reservation check in date is after existing reservations check outdate
+		if (!(desiredCheckOut.isBefore(r.getCheckInDate()) || desiredCheckIn.isAfter(r.getCheckOutDate()))) {
+			return false; // Overlapping reservation dates found.
+		}
+	}
+
+	return true; //No overlapping reservations
+    }
+     **/
 
 
 } // End ReservationManager class
