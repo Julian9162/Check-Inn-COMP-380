@@ -67,6 +67,37 @@ public class ReservationManager {
 
     } // End ReservationManager() constructor
 
+    private boolean checkDates(String checkIn, String checkOut, String roomType) {
+
+        Date d;
+        LocalDate in, out, temp;
+        String s;
+        String[] parts;
+
+        parts = checkIn.split("-");
+        in = LocalDate.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+        
+        parts = checkOut.split("-");
+        out = LocalDate.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
+
+        if (in.isAfter(out)) return false;
+
+        temp = in;
+        while (!temp.isAfter(out)) {
+
+            s = temp.getYear() + "-" + temp.getMonthValue() + "-" + temp.getDayOfMonth();
+            d = CheckInnInterface.dateManager.checkDate(s, roomType);
+
+            if (d == null) return false;
+
+            temp.plusDays(1);
+
+        }
+
+        return true;
+
+    }
+
     // generateKey() method creates and returns unique identification number for reservation
     private int generateKey(Customer c) {
 
@@ -153,8 +184,11 @@ public class ReservationManager {
         String[] name = customerName.split(" "); // Split first and last
         Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
 
+        if (!checkDates(checkInDate, checkOutDate, roomType)) return null;
+
         // Creates new reservation. Includes basic reservation information and creates a new key.
         r = new Reservation(generateKey(c), c, roomType, groupSize, checkInDate, checkOutDate, false, "0");
+        r.updateSchedule();
         reservation.add(r); // Add to linked list
         reservationID.add(r.getReservationID()); // Add to array list
 
@@ -237,11 +271,13 @@ public class ReservationManager {
         switch(value) {
         // Customer has cancelled the reservation
         case 2:
+            CheckInnInterface.dateManager.removeFromDates(r);
             CheckInnInterface.repManager.addEvent(r, "0", "Cancelled");
             CheckInnInterface.arcManager.addToArchive(r, "Cancelled");
             break;
         // Customer never arrived to hotel
         case 1:
+            CheckInnInterface.dateManager.removeFromDates(r);
             CheckInnInterface.repManager.addEvent(r, "0", "Absent");
             CheckInnInterface.arcManager.addToArchive(r, "Absent");
             break;
@@ -284,20 +320,7 @@ public class ReservationManager {
         catch(Exception e) {System.out.println("IO Error ResManager switch: " + e.getMessage());}
 
     }
-
-    public String editReservation(long reservationID, String roomType, int groupSize,
-                                    String checkIn, String checkOut) {
-
-        Reservation r = getReservation(reservationID);
-
-        if (r != null) {
-
-            
-
-        }
-
-    }
-    
+ 
     // switchReservationStatus changes status of reservation and edits csv file to reflect change
     public void switchReservationStatus(Reservation r) {
         
@@ -307,6 +330,40 @@ public class ReservationManager {
         modifyReservationFile();
 
     } // End switchReservationStatus(r)
+
+    public boolean editReservation(long reservationID, String roomType, int groupSize,
+                                    String checkIn, String checkOut) {
+
+        Reservation r = getReservation(reservationID);
+
+        if (r != null) {
+
+            if (!roomType.equals(r.getRoomType())) {
+
+                if (!checkDates(checkIn, checkOut, roomType)) return false;
+
+                else {
+
+                    CheckInnInterface.dateManager.removeFromDates(r);
+                    
+
+                }
+
+            }
+
+            else {
+
+
+
+            }
+
+            //if (!checkIn.equals(r.getSchedule().get(0)))
+
+        }
+
+        return false;
+
+    }
 
     public void editRoomType(long reservationID, String roomType) {
         
@@ -358,6 +415,7 @@ public class ReservationManager {
         r.setCheckOutDate(checkOut);
         modifyReservationFile();
     }
+
 
    /**
      *  Verifies the availability of dates for a new reservation 

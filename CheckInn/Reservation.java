@@ -1,6 +1,8 @@
 package CheckInn;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
  /**
  * Reservation --- This class is used to store and manage individual reservation objects. It representings a booking in
@@ -15,11 +17,10 @@ public class Reservation {
     private Customer customer; // Saves customer information of customer that booked reservation
     private String roomType; // Saves desired room type for reservation
     private int groupSize; // Saves group size for reservation
-    private LocalDate checkInDate; // Saves the check in date for the reservation
-    private LocalDate checkOutDate; // Saves the check out date for the reservation
     private long reservationID; // Saves the reservation identification number for reservation
     private boolean activeStatus; // Saves the status of reservation (whether it is active or not)
     private String roomNumber;
+    private List<Date> schedule;
 
     // Reservation constructor creates reservation object
     public Reservation(long reservationID, Customer customer, String roomType, int groupSize, 
@@ -33,16 +34,7 @@ public class Reservation {
         this.activeStatus = activeStatus;
         this.roomNumber = roomNumber;
 
-        // Saves check in date into LocalDate object
-        String[] dateParts1 = checkInDate.split("-", 3);
-        
-        this.checkInDate = LocalDate.of(Integer.parseInt(dateParts1[0]), Integer.parseInt(dateParts1[1]), 
-                                        Integer.parseInt(dateParts1[2]));
-
-        // Saves check out date into LocalDate object
-        String[] dateParts2 = checkOutDate.split("-", 3); 
-        this.checkOutDate = LocalDate.of(Integer.parseInt(dateParts2[0]), Integer.parseInt(dateParts2[1]), 
-                                        Integer.parseInt(dateParts2[2]));
+        setSchedule(checkInDate, checkOutDate);
 
     } // End Reservation(reservationID, customer, roomType, groupSize, checkInDate, checkOutDate) constructor
 
@@ -50,6 +42,12 @@ public class Reservation {
     public void switchActiveStatus() {
         activeStatus = !activeStatus;
     } // End switchActiveStatus()
+
+    public void updateSchedule() {
+
+        for (int i = 0; i <= schedule.size() - 1; i++) schedule.get(i).updateDate(roomType, 1);
+
+    }
 
     // getCustomer() returns customer information of customer that booked this reservation
     public Customer getCustomer() {
@@ -66,24 +64,28 @@ public class Reservation {
         return groupSize;
     } // End getGroupSize()
 
+    public List<Date> getSchedule() {
+        return schedule;
+    }
+
     //getCheckInDate() returns date for checking in
-    public LocalDate getCheckInDate() {
-        return checkInDate;
+    public Date getCheckInDate() {
+        return schedule.get(0);
     } // End getCheckInDate()
 
     //getCheckOutDate() returns date for checking in
-    public LocalDate getCheckOutDate() {
-        return checkOutDate;
+    public Date getCheckOutDate() {
+        return schedule.get(schedule.size() - 1);
     } // End getCheckOutDate()
 
     // getCheckInDate() returns date for checking in
     public String getCheckInDateStr() {
-        return checkInDate.getYear() + "-" + checkInDate.getMonthValue() + "-" + checkInDate.getDayOfMonth();
+        return schedule.get(0).dateString();
     } // End getCheckInDate()
 
     // getCheckOutDate() returns date for checking out
     public String getCheckOutDateStr() {
-        return checkOutDate.getYear() + "-" + checkOutDate.getMonthValue() + "-" + checkOutDate.getDayOfMonth();
+        return schedule.get(schedule.size() - 1).dateString();
     } // End getCheckOutDate()
 
     // getReservationID() returns identification number of this reservation
@@ -112,21 +114,35 @@ public class Reservation {
         this.roomType = roomType;
     }
 
-    public void setCheckInDate(String checkInDate) {
+    public void setSchedule(String i, String o) {
 
-        String[] dateParts = checkInDate.split("-", 3);
-        
-        this.checkInDate = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), 
-                                        Integer.parseInt(dateParts[2]));
+        String s;
+        LocalDate in;
+        LocalDate out;
+        LocalDate lD;
+        Date d;
+        schedule = new ArrayList<>();
 
-    }
+        // Saves check in date into LocalDate object
+        String[] dateParts1 = i.split("-", 3);
+        in = LocalDate.of(Integer.parseInt(dateParts1[0]), Integer.parseInt(dateParts1[1]), 
+                                        Integer.parseInt(dateParts1[2]));
 
-    public void setCheckOutDate(String checkOutDate) {
+        // Saves check out date into LocalDate object
+        String[] dateParts2 = o.split("-", 3); 
+        out = LocalDate.of(Integer.parseInt(dateParts2[0]), Integer.parseInt(dateParts2[1]), 
+                                        Integer.parseInt(dateParts2[2]));
 
-        String[] dateParts = checkOutDate.split("-", 3);
-        
-        this.checkOutDate = LocalDate.of(Integer.parseInt(dateParts[0]), Integer.parseInt(dateParts[1]), 
-                                        Integer.parseInt(dateParts[2]));
+        lD = in;
+        while (!lD.isAfter(out)) {
+
+            s = lD.getYear() + "-" + lD.getMonthValue() + "-" + lD.getDayOfMonth();
+            d = CheckInnInterface.dateManager.getDate(s);
+
+            schedule.add(d);
+            lD.plusDays(1);
+            
+        }
 
     }
 

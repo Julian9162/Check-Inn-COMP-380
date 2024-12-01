@@ -10,6 +10,7 @@ import javafx.stage.*;
 public class CheckInnInterface extends Application {
 
     public Stage window;
+    public static DateManager dateManager = new DateManager();
     public static ReservationManager resManager = new ReservationManager();
     public static ArchiveManager arcManager = new ArchiveManager();
     public static ReportManager repManager = new ReportManager();
