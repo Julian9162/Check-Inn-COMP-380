@@ -195,4 +195,38 @@ public class EmployeeManager {
 
     } // End changeRoomAvailability(roomNumber, availability)
 
+    /** 
+     * Calculates the cost for the amount of nights stayed in the reservation
+     * @exception           Invalid RoomType
+     * @return              Total cost for # of nights stayed
+     */
+    public int calculateTotalcost() {
+        int pricePerNight;
+
+        switch (roomType) {
+            case "single":
+                pricePerNight = 120;
+                break;
+            case "double":
+                pricePerNight = 180;
+                break;
+            case "triple":
+                pricePerNight = 240;
+                break;
+            case "connected":
+                pricePerNight = 200;
+                break;
+            case "suite":
+                pricePerNight = 400;
+                break;
+            case "penthouse":
+                pricePerNight = 1000;
+                break;
+            default: 
+                System.out.println("Invalid room type: " + roomType);
+                return 0;
+        }
+
+        return pricePerNight * nightsSpent();
+    }
 } // End EmployeeManager class
