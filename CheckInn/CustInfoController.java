@@ -61,9 +61,15 @@ public class CustInfoController{
     public void submitInfo(ActionEvent event) throws IOException {
         CheckInnInterface.reserve = CheckInnInterface.resManager.createReservation(FullName.getText(),CheckInnInterface.type,Integer.parseInt(GroupSize.getText()),
                                                         CheckInnInterface.checkin,CheckInnInterface.checkout,Email.getText());
-        stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();
+
+        if (CheckInnInterface.reserve == null) {
+            //limit reached
+            System.out.println("LIMIT REACHED!!!");
+        } else {
+            stage = (Stage) topBar.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show();
+        }        
     }
 }

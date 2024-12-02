@@ -48,7 +48,6 @@ public class ReservationManager {
                 Reservation r = new Reservation(Long.parseLong(parts[0]), c, parts[2], Integer.parseInt(parts[3]), 
                                                 parts[4], parts[5], activeStatus, parts[7]);
 
-                
                 // Store reservation object into reservation linked list
                 reservation.add(r);
                 // Store reservation object ID attribute into reservationID array
@@ -90,7 +89,7 @@ public class ReservationManager {
 
             if (d == null) return false;
 
-            temp.plusDays(1);
+            temp = temp.plusDays(1);
 
         }
 
@@ -189,12 +188,13 @@ public class ReservationManager {
         // Creates new reservation. Includes basic reservation information and creates a new key.
         r = new Reservation(generateKey(c), c, roomType, groupSize, checkInDate, checkOutDate, false, "0");
         r.updateSchedule();
+        CheckInnInterface.dateManager.updateDateFile();
         reservation.add(r); // Add to linked list
         reservationID.add(r.getReservationID()); // Add to array list
 
         // Add newly created reservation object to reservation csv file
         try {addToReservationFile(r);}
-        catch(Exception e) {System.out.println("I/O Error: " + e.getMessage());}
+        catch(Exception e) {System.out.println("I/O Error: here " + e.getMessage());}
 
         CheckInnInterface.repManager.addEvent(r, "0", "Created");
 
@@ -398,7 +398,7 @@ public class ReservationManager {
             System.out.println("Reservation not found");
             return;
         }
-        r.setCheckInDate(checkIn);
+        r.setSchedule(checkIn, r.getCheckOutDateStr());
 
         modifyReservationFile();
         
@@ -412,7 +412,7 @@ public class ReservationManager {
             return;
         }
         
-        r.setCheckOutDate(checkOut);
+        r.setSchedule(r.getCheckInDateStr(), checkOut);
         modifyReservationFile();
     }
 

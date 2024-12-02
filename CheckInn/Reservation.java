@@ -140,7 +140,7 @@ public class Reservation {
             d = CheckInnInterface.dateManager.getDate(s);
 
             schedule.add(d);
-            lD.plusDays(1);
+            lD = lD.plusDays(1);
             
         }
 

@@ -14,9 +14,9 @@ import javafx.stage.*;
 
 public class editController implements Initializable{
     @FXML
-    private Label checkInDate;
+    private TextField checkInDate;
     @FXML
-    private Label checkOutDate;
+    private TextField checkOutDate;
     @FXML
     private Button closeButton;
     @FXML
@@ -24,17 +24,15 @@ public class editController implements Initializable{
     @FXML
     private HBox topBar;
     @FXML
-    private Label roomType;
+    private TextField roomType;
     @FXML
-    private Label groupSize;
+    private TextField groupSize;
+    @FXML
+    private Label errorText;
 
     //reservation details
     private long reservationNumber;
-    private String checkIn;
-    private String checkOut;
-    private String type;
     private String name;
-    private int size;
 
     private Stage stage;
     double x = 0, y = 0;
@@ -68,16 +66,25 @@ public class editController implements Initializable{
 
     //submit button handler
     public void editReserve(ActionEvent event) throws IOException {
-        stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
-        stage.setScene(new Scene(root));
-        stage.show();        
+        //call edit function with values of new reservation details
+        if (CheckInnInterface.resManager.editReservation(reservationNumber, roomType.getText(),
+                Integer.parseInt(groupSize.getText()), checkInDate.getText(), checkOutDate.getText())) {
+
+                    //edit was successful, go to review page
+                    stage = (Stage) topBar.getScene().getWindow();
+                    Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
+                    stage.setScene(new Scene(root));
+                    stage.show(); 
+        } else {
+            errorText.setText("Error! Invalid reservation status!");
+        }        
     }
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables
         reservationNumber = CheckInnInterface.reserve.getReservationID();
+        name = CheckInnInterface.reserve.getCustomer().getFirstName();
 
         //Initialize page
         reservationLabel.setText("Editing Reservation: " + reservationNumber + " for " + name);

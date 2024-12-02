@@ -63,7 +63,7 @@ public class Report {
         } // End try
 
         // Catch exception
-        catch(Exception e) {System.out.println("I/O Error Report Entity: " + e.getMessage())}
+        catch(Exception e) {System.out.println("I/O Error Report Entity: " + e.getMessage());}
 
     } // End Report constructor
 

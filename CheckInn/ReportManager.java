@@ -3,8 +3,6 @@ package CheckInn;
 import java.io.File;
 import java.io.FileReader;
 import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.BufferedWriter;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,6 +37,7 @@ public class ReportManager {
 
     // addEvent() method adds new record to today's report. 
     // Creates new file incase file does not exist.
+    @SuppressWarnings("unused")
     public void addEvent(Reservation res, String room, String event) {
 
         try {

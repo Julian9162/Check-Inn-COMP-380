@@ -28,7 +28,7 @@ public class DateManager {
                 String[] dv = parts[0].split("-");
 
                 LocalDate d = LocalDate.of(Integer.parseInt(dv[0]), Integer.parseInt(dv[1]), Integer.parseInt(dv[2]));
-                if (d.isAfter(LocalDate.now())) {
+                if (LocalDate.now().isAfter(d)) {
 
                     removeFromDateFile(parts[0]);
                     continue;
@@ -66,18 +66,23 @@ public class DateManager {
 
     public void sortDates() {
 
+        int count = 0;
+
         for (int i = 1; i <= dates.size(); i++) {
 
-            for (int j = 0; j <= dates.size() - 1; j++) {
+            for (int j = 0; j < dates.size() - 1; j++) {
 
                 if (dates.get(j).getLocalDate().isAfter(dates.get(j + 1).getLocalDate())) 
                     swapDates(j, j + 1);
+
+                count++;
 
             }
 
         }
 
         updateDateFile();
+        System.out.println(count + " werwerwerwerwee");
 
     }
 
@@ -93,7 +98,7 @@ public class DateManager {
             sortDates();
         }
 
-        catch(Exception e) {System.out.println("I/O Error DateManager: " + e.getMessage());}
+        catch(Exception e) {System.out.println("I/O Error DateManager add: " + e.getMessage());}
 
     }
 
@@ -116,7 +121,7 @@ public class DateManager {
 
         } // End try
 
-        catch(Exception e) {System.out.println("IO Error DateManager : " + e.getMessage());}
+        catch(Exception e) {System.out.println("IO Error DateManager update: " + e.getMessage());}
 
     }
 
@@ -144,7 +149,7 @@ public class DateManager {
 
         } // End try
 
-        catch(Exception e) {System.out.println("I/O Error: " + e.getMessage());}
+        catch(Exception e) {System.out.println("I/O Error: remove" + e.getMessage());}
 
     }
 
@@ -153,9 +158,9 @@ public class DateManager {
         if (!dateS.contains(d)) { 
             
             Date date = new Date(d);
-            addToDateFile(date);
             dates.add(date);
             dateS.add(d);
+            addToDateFile(date);
             return date;
 
         }

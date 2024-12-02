@@ -86,10 +86,8 @@ public class reviewController implements Initializable{
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables
         reservationNumber = CheckInnInterface.reserve.getReservationID();
-        checkIn = CheckInnInterface.reserve.getCheckInDate().getMonthValue() + "/" + 
-                    CheckInnInterface.reserve.getCheckInDate().getDayOfMonth() + "/" + CheckInnInterface.reserve.getCheckInDate().getYear();
-        checkOut = CheckInnInterface.reserve.getCheckOutDate().getMonthValue() + "/" + 
-                    CheckInnInterface.reserve.getCheckOutDate().getDayOfMonth() + "/" + CheckInnInterface.reserve.getCheckOutDate().getYear();
+        checkIn = CheckInnInterface.reserve.getCheckInDate().dateString();
+        checkOut = CheckInnInterface.reserve.getCheckOutDate().dateString();
         type = CheckInnInterface.reserve.getRoomType();
         size = CheckInnInterface.reserve.getGroupSize();
         name = CheckInnInterface.reserve.getCustomer().getFirstName();

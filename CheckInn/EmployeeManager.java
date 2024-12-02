@@ -107,11 +107,11 @@ public class EmployeeManager {
 
         // Current date that customer is attempting to check into hotel is before their check in date.
         // Returns string specifying that current date is before check in date.
-        if (LocalDate.now().isBefore(r.getCheckInDate())) return "BeforeDate";
+        if (LocalDate.now().isBefore(r.getCheckInDate().getLocalDate())) return "BeforeDate";
 
         // Current date that customer is attempting to check into hotel is after their check in date.
         // Returns string specifying that current date is after check in date.
-        else if (LocalDate.now().isAfter(r.getCheckInDate())) return "AfterDate";
+        else if (LocalDate.now().isAfter(r.getCheckInDate().getLocalDate())) return "AfterDate";
 
         // There is an issue assigning a room to the reservation. 
         // Returns string specifying that assignation of room was unsuccessful.
