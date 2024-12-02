@@ -74,7 +74,7 @@ public class ReportManager {
                 todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
                 + " - RESERVATION: " + res.getReservationID() + " - ROOM: " + room + " - MESSAGE: Customer Checked Out");
                 break;
-
+                
             case "Absent":
                 todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
                 + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Customer Never Arrived");
@@ -84,6 +84,10 @@ public class ReportManager {
                 todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
                 + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Customer Checked In");
                 break;
+
+            case "Edited":
+                todaysReport.addToReport("TIME: " + time + " - CUSTOMER: " + res.getCustomer().getCustomerID()
+                + " - RESERVATION: " + res.getReservationID() + " - MESSAGE: Reservation Edited");
 
             } // End switch
 

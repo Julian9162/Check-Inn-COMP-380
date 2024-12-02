@@ -28,7 +28,7 @@ public class DateManager {
                 String[] dv = parts[0].split("-");
 
                 LocalDate d = LocalDate.of(Integer.parseInt(dv[0]), Integer.parseInt(dv[1]), Integer.parseInt(dv[2]));
-                if (d.isAfter(LocalDate.now())) {
+                if (LocalDate.now().isAfter(d)) {
 
                     removeFromDateFile(parts[0]);
                     continue;
@@ -68,7 +68,7 @@ public class DateManager {
 
         for (int i = 1; i <= dates.size(); i++) {
 
-            for (int j = 0; j <= dates.size() - 1; j++) {
+            for (int j = 0; j < dates.size() - 1; j++) {
 
                 if (dates.get(j).getLocalDate().isAfter(dates.get(j + 1).getLocalDate())) 
                     swapDates(j, j + 1);
@@ -153,9 +153,10 @@ public class DateManager {
         if (!dateS.contains(d)) { 
             
             Date date = new Date(d);
-            addToDateFile(date);
             dates.add(date);
             dateS.add(d);
+            addToDateFile(date);
+
             return date;
 
         }
@@ -164,13 +165,13 @@ public class DateManager {
 
     }
 
-    public Date checkDate(String d, String r) {
+    public Date checkDate(String d, String r, boolean b) {
 
         if (!dateS.contains(d)) return new Date(d);
 
         Date date = dates.get(dateS.indexOf(d));
 
-        if (date.reachedLimit(r)) return null;
+        if (date.reachedLimit(r, b)) return null;
 
         else return date;
 

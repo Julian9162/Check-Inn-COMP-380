@@ -67,12 +67,13 @@ public class ReservationManager {
 
     } // End ReservationManager() constructor
 
-    private boolean checkDates(String checkIn, String checkOut, String roomType) {
+    private boolean checkDates(String checkIn, String checkOut, String roomType, Reservation r) {
 
         Date d;
-        LocalDate in, out, temp;
         String s;
         String[] parts;
+        boolean same;
+        LocalDate in, out, temp;
 
         parts = checkIn.split("-");
         in = LocalDate.of(Integer.parseInt(parts[0]), Integer.parseInt(parts[1]), Integer.parseInt(parts[2]));
@@ -85,12 +86,16 @@ public class ReservationManager {
         temp = in;
         while (!temp.isAfter(out)) {
 
+            same = false;
             s = temp.getYear() + "-" + temp.getMonthValue() + "-" + temp.getDayOfMonth();
-            d = CheckInnInterface.dateManager.checkDate(s, roomType);
+
+            if (r != null && r.scheduleContains(s)) same = true;
+
+            d = CheckInnInterface.dateManager.checkDate(s, roomType, same);
 
             if (d == null) return false;
 
-            temp.plusDays(1);
+            temp = temp.plusDays(1);
 
         }
 
@@ -184,11 +189,12 @@ public class ReservationManager {
         String[] name = customerName.split(" "); // Split first and last
         Customer c = CheckInnInterface.cusManager.getCustomer(name[0], name[1], email); // Obtain a customer object
 
-        if (!checkDates(checkInDate, checkOutDate, roomType)) return null;
+        if (!checkDates(checkInDate, checkOutDate, roomType, null)) return null;
 
         // Creates new reservation. Includes basic reservation information and creates a new key.
         r = new Reservation(generateKey(c), c, roomType, groupSize, checkInDate, checkOutDate, false, "0");
         r.updateSchedule();
+        CheckInnInterface.dateManager.updateDateFile();
         reservation.add(r); // Add to linked list
         reservationID.add(r.getReservationID()); // Add to array list
 
@@ -331,8 +337,8 @@ public class ReservationManager {
 
     } // End switchReservationStatus(r)
 
-    public boolean editReservation(long reservationID, String roomType, int groupSize,
-                                    String checkIn, String checkOut) {
+    public boolean editReservation(long reservationID, String roomType, int groupSize, String checkIn, 
+                                    String checkOut) {
 
         Reservation r = getReservation(reservationID);
 
@@ -340,133 +346,45 @@ public class ReservationManager {
 
             if (!roomType.equals(r.getRoomType())) {
 
-                if (!checkDates(checkIn, checkOut, roomType)) return false;
+                if (!checkDates(checkIn, checkOut, roomType, null)) return false;
 
                 else {
 
                     CheckInnInterface.dateManager.removeFromDates(r);
+                    r.setRoomType(roomType);
+                    r.setSchedule(checkIn, checkOut);
+                    r.updateSchedule();
                     
-
                 }
 
             }
 
             else {
 
+                if (!checkIn.equals(r.getCheckInDateStr()) || !checkOut.equals(r.getCheckOutDateStr())) {
 
+                    if (!checkDates(checkIn, checkOut, roomType, r)) return false;
+
+                    else {
+
+                        CheckInnInterface.dateManager.removeFromDates(r);
+                        r.setSchedule(checkIn, checkOut);
+                        r.updateSchedule();
+                        
+                    }
+
+                }
 
             }
 
-            //if (!checkIn.equals(r.getSchedule().get(0)))
-
+            r.setGroupSize(groupSize);
+            CheckInnInterface.repManager.addEvent(r, "0", "Edited");
+            return true;
+            
         }
 
         return false;
 
     }
-
-    public void editRoomType(long reservationID, String roomType) {
-        
-        Reservation r = getReservation(reservationID);
-
-        if (r == null) {
-            System.out.println("Reservation not found");
-            return;
-        }
-
-        r.setRoomType(roomType);
-        modifyReservationFile();
-        
-    }
-
-    public void editGroupSize(long reservationID, int groupSize) {
-
-        Reservation r = getReservation(reservationID);
-        if (r == null) {
-            System.out.println("Reservation not found");
-            return;
-        }
-        
-        r.setGroupSize(groupSize);
-        modifyReservationFile();
-
-    }
-
-    public void editCheckInDate(long reservationID, String checkIn) {
-        Reservation r = getReservation(reservationID);
-        if (r == null) {
-            System.out.println("Reservation not found");
-            return;
-        }
-        r.setCheckInDate(checkIn);
-
-        modifyReservationFile();
-        
-    }
-
-    public void editCheckOutDate(long reservationID, String checkOut) {
-
-        Reservation r = getReservation(reservationID);
-        if (r == null) {
-            System.out.println("Reservation not found");
-            return;
-        }
-        
-        r.setCheckOutDate(checkOut);
-        modifyReservationFile();
-    }
-
-
-   /**
-     *  Verifies the availability of dates for a new reservation 
-     * @param     checkIn  The desired check in date
-     * @param     checkOut The desired check out date
-     * @return	  true if the dates are valid and do not overlap with existing reservations
-     */
-    /**
-    public boolean verifyDateAvailability(String checkIn, String checkOut) {
-    
-        // Date Format: Year - Month - Day
-        String[] inDate = checkIn.split("-");
-        String[] outDate = checkOut.split("-");
-
-	// Convert the string into integers
-        int[] in = new int[3];
-        int[] out = new int[3];
-
-        for (int i = 0; i < 3) {
-		in[i] = Integer.parseInt(inDate[i]);
-		out[i] = Integer.parseInt(outDate[i]);
-	}
-
-	// Create localDate objects for the desired check in and check out date
-	LocalDate desiredCheckIn = LocalDate.of(in[0],in[1],in[2]);
-	LocalDate desiredCheckOut = LocalDate.of(out[0],out[1],out[2]);
-        
-	// Checking to see if the desired check out date is after the desired check in date
-	if (!desiredCheckOut.isAfter(desiredCheckIn)) {
-		System.out.println("Check out date must be after check in date");
-		return false; 
-	}
-
-	// Existing from Dec 5th to the 8th 
-    	// Desired from Dec6th to Dec 9th
-
-    	//Dec9.isBefore(Dec5) -> false
-    	//Dec6.isAfter(Dec8) -> false
-	// Checking for overlapping reservations
-	for (//go through reservations) {
-		// Checks to see if the desired reservation dates overlap with the existing reservation dates 
-		// First cond: Desired reservation check out date is before existing reservations check indate
-		// Second cond: Desired reservation check in date is after existing reservations check outdate
-		if (!(desiredCheckOut.isBefore(r.getCheckInDate()) || desiredCheckIn.isAfter(r.getCheckOutDate()))) {
-			return false; // Overlapping reservation dates found.
-		}
-	}
-
-	return true; //No overlapping reservations
-    }
-     **/
-
 
 } // End ReservationManager class
