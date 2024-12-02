@@ -197,29 +197,32 @@ public class EmployeeManager {
 
     /** 
      * Calculates the cost for the amount of nights stayed in the reservation
+     * @param               The reservation object r
      * @exception           Invalid RoomType
      * @return              Total cost for # of nights stayed
      */
-    public int calculateTotalcost() {
+    public int calculateTotalcost(Reservation r) {
         int pricePerNight;
 
+        String roomType = r.getRoomType();
+        
         switch (roomType) {
-            case "single":
+            case "Single":
                 pricePerNight = 120;
                 break;
-            case "double":
+            case "Double":
                 pricePerNight = 180;
                 break;
-            case "triple":
+            case "Triple":
                 pricePerNight = 240;
                 break;
-            case "connected":
+            case "Connected":
                 pricePerNight = 200;
                 break;
-            case "suite":
+            case "Suite":
                 pricePerNight = 400;
                 break;
-            case "penthouse":
+            case "Penthouse":
                 pricePerNight = 1000;
                 break;
             default: 
@@ -227,6 +230,6 @@ public class EmployeeManager {
                 return 0;
         }
 
-        return pricePerNight * nightsSpent();
+        return pricePerNight * r.nightsSpent();
     }
 } // End EmployeeManager class
