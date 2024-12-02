@@ -129,15 +129,25 @@ public class RoomManager {
 	// The reservation is assigned to the room
 	// The rooms availability is updated to false (unavailable) 
         if (roomNumber != null) {
-
-            assignReservationNumber(roomNumber,r.getReservationID());
-            updateRoomAvailability(roomNumber, false);
-            return true; // For successful 
+			// Only allows a room to be assigned to a reservation if the room is clean. 
+			if (isRoomClean(roomNumber)) {
+				assignReservationNumber(roomNumber,r.getReservationID());
+				updateRoomAvailability(roomNumber, false);
+				markRoomCleanStatus(roomNumber, false);
+				return true; // For successful 
+			} 
+			
         } else {
             return false; // For unsuccessful
         }
     }
 
+     /**
+     *  Checks whether a specified room is clean.  
+     * @param    roomNumber		The number of the room to check.
+     * @return	  True if the room is clean, false otherwise.
+     * @exception    FileNotFoundException		If the room file is not found.
+     */
     public boolean isRoomClean (String roomNumber) throws FileNotFoundException {
 	    List<String[]> rooms = getAllRooms();
 
@@ -150,7 +160,13 @@ public class RoomManager {
 	    return false;
     }
 
-    public void markRoomForClean(String roomNumber, boolean isClean) throws IOException {
+     /**
+     *  Updates the cleanliness status of a specified room in the room file.
+     * @param    roomNumber			The number of the room to check.
+     * @param    isClean			True to mark the room as clean, false to mark it as dirty
+     * @exception    IOException 	if an error occurs while reading or writing to the file. 
+     */
+    public void markRoomCleanStatus(String roomNumber, boolean isClean) throws IOException {
 	    List<String[]> rooms = getAllRooms();
 
             BufferedWriter writer = new BufferedWriter(new FileWriter(roomFile));
