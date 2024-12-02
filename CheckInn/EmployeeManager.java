@@ -3,10 +3,7 @@ package CheckInn;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.*;
-import java.io.File;
 
 /**
  * EmployeeManager --- Employee controller class manages employee entities and contains features that allow an employee to 

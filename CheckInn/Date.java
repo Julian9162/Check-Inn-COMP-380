@@ -33,7 +33,9 @@ public class Date {
 
     }
 
-    public boolean reachedLimit(String r) {
+    public boolean reachedLimit(String r, boolean same) {
+
+        if (same) return false; 
 
         switch (r) {
 

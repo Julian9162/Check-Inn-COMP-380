@@ -21,6 +21,7 @@ public class Reservation {
     private boolean activeStatus; // Saves the status of reservation (whether it is active or not)
     private String roomNumber;
     private List<Date> schedule;
+    private List<String> scheduleIndex;
 
     // Reservation constructor creates reservation object
     public Reservation(long reservationID, Customer customer, String roomType, int groupSize, 
@@ -140,10 +141,19 @@ public class Reservation {
             d = CheckInnInterface.dateManager.getDate(s);
 
             schedule.add(d);
+            scheduleIndex.add(s);
             lD = lD.plusDays(1);
             
         }
 
+    }
+
+    public boolean scheduleContains(String d) {
+
+        if (scheduleIndex.contains(d)) return true;
+
+        return false;
+        
     }
 
 } // End Reservation class

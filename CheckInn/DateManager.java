@@ -169,13 +169,13 @@ public class DateManager {
 
     }
 
-    public Date checkDate(String d, String r) {
+    public Date checkDate(String d, String r, boolean b) {
 
         if (!dateS.contains(d)) return new Date(d);
 
         Date date = dates.get(dateS.indexOf(d));
 
-        if (date.reachedLimit(r)) return null;
+        if (date.reachedLimit(r, b)) return null;
 
         else return date;
 
