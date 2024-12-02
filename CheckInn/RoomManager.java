@@ -129,6 +129,7 @@ public class RoomManager {
 	// The reservation is assigned to the room
 	// The rooms availability is updated to false (unavailable) 
         if (roomNumber != null) {
+
             assignReservationNumber(roomNumber,r.getReservationID());
             updateRoomAvailability(roomNumber, false);
             return true; // For successful 
@@ -136,6 +137,32 @@ public class RoomManager {
             return false; // For unsuccessful
         }
     }
+
+    public boolean isRoomClean (String roomNumber) throws FileNotFoundException {
+	    List<String[]> rooms = getAllRooms();
+
+	    for (String [] roomDetails : rooms) {
+		    if(roomDetails[0].equals(roomNumber)) {
+			    return roomDetails[4].equals("true");
+		    }
+	    }
+
+	    return false;
+    }
+
+    public void markRoomForClean(String roomNumber, boolean isClean) throws IOException {
+	    List<String[]> rooms = getAllRooms();
+
+            BufferedWriter writer = new BufferedWriter(new FileWriter(roomFile));
+	    for (String [] roomDetails : rooms) {
+		    if (roomDetails[0].equals(roomNumber)) {
+			    roomDetails[4] = String.valueOf(isClean);
+		    }
+		    writer.write(String.join(",", roomDetails));
+		    writer.newLine();
+	    }
+	    writer.close();
+    } 
 
     public int findRoom(Reservation r) {
 
