@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <top>
+      <AnchorPane BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane stylesheets="@../../../../../../../CheckInn/StyleSheet.css">
+               <children>
+                  <HBox fx:id="topBar" alignment="CENTER_RIGHT" onMouseDragged="#dragXY" onMousePressed="#setXY" prefWidth="600.0" styleClass="topBar" stylesheets="@../../../../../../../CheckInn/StyleSheet.css">
+                     <children>
+                        <Button mnemonicParsing="false" onAction="#loginButton" styleClass="topBarButton" stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="Employee Login" />
+                        <Pane prefWidth="8.0" />
+                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#close" styleClass="closeButton" stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="X" textAlignment="CENTER" />
+                     </children>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="2.0">
+                     <children>
+                        <Label stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="CheckInn | Home">
+                           <font>
+                              <Font name="Corbel" size="14.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+   </top>
+   <left>
+      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Pane prefHeight="63.0" prefWidth="600.0">
+               <HBox.margin>
+                  <Insets bottom="320.0" />
+               </HBox.margin>
+               <padding>
+                  <Insets left="600.0" />
+               </padding>
+               <children>
+                  <Pane layoutY="77.0" prefHeight="284.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="64.0" layoutY="18.0" prefHeight="50.0" prefWidth="162.0" text="Total Price:">
+                           <padding>
+                              <Insets left="100.0" />
+                           </padding>
+                        </Label>
+                        <TextField layoutX="226.0" layoutY="30.0" />
+                     </children>
+                  </Pane>
+                  <Label layoutX="154.0" layoutY="28.0" prefHeight="60.0" prefWidth="235.0" text="Transaction Information:">
+                     <padding>
+                        <Insets left="50.0" top="30.0" />
+                     </padding>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </HBox>
+   </left>
+</BorderPane>
