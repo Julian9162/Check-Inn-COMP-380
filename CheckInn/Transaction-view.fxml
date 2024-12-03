@@ -7,7 +7,6 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
@@ -54,15 +53,35 @@
                <children>
                   <Pane layoutY="77.0" prefHeight="284.0" prefWidth="600.0">
                      <children>
-                        <Label layoutX="64.0" layoutY="18.0" prefHeight="50.0" prefWidth="162.0" text="Total Price:">
-                           <padding>
-                              <Insets left="100.0" />
-                           </padding>
-                        </Label>
-                        <TextField layoutX="226.0" layoutY="30.0" />
+                        <GridPane layoutX="101.0" layoutY="22.0" prefHeight="85.0" prefWidth="323.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="163.0" minWidth="10.0" prefWidth="162.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="161.0" minWidth="10.0" prefWidth="161.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints maxHeight="32.0" minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="46.0" minHeight="10.0" prefHeight="32.0" vgrow="SOMETIMES" />
+                            <RowConstraints maxHeight="35.0" minHeight="10.0" prefHeight="29.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <Label prefHeight="17.0" prefWidth="161.0" text="Full Name:">
+                                 <padding>
+                                    <Insets left="100.0" />
+                                 </padding>
+                              </Label>
+                              <TextField GridPane.columnIndex="1" />
+                              <Label prefHeight="17.0" prefWidth="161.0" text="Total Price:" GridPane.rowIndex="1">
+                                 <GridPane.margin>
+                                    <Insets left="99.0" />
+                                 </GridPane.margin>
+                              </Label>
+                              <Label prefHeight="23.0" prefWidth="159.0" text="amount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <Button layoutX="248.0" layoutY="107.0" mnemonicParsing="false" text="Confirm" />
                      </children>
                   </Pane>
-                  <Label layoutX="154.0" layoutY="28.0" prefHeight="60.0" prefWidth="235.0" text="Transaction Information:">
+                  <Label layoutX="154.0" layoutY="28.0" prefHeight="60.0" prefWidth="235.0" text="Billing Information:">
                      <padding>
                         <Insets left="50.0" top="30.0" />
                      </padding>
