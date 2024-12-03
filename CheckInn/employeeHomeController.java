@@ -68,6 +68,14 @@ public class employeeHomeController{
         stage.show();
     }
 
+    //check out button handler
+    public void updateClean(ActionEvent event) throws IOException {
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource("updateClean.fxml"));
+        stage.setScene(new Scene(root));
+        stage.show();
+    }
+
     //view reports button handler
     public void viewReports(ActionEvent event) throws IOException {
         fileChooser.setInitialDirectory(new File("CheckInn\\reports\\"));

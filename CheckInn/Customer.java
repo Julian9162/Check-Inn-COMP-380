@@ -48,6 +48,10 @@ public class Customer {
         return last;
     } // End getLastName()
 
+    public String getFullName() {
+        return first + " " + last;
+    }
+
     /**
      * Retreives email address of customer
      * @exception  none

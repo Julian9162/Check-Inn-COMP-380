@@ -123,6 +123,7 @@ public class Reservation {
         LocalDate lD;
         Date d;
         schedule = new ArrayList<>();
+        scheduleIndex = new ArrayList<>();
 
         // Saves check in date into LocalDate object
         String[] dateParts1 = i.split("-", 3);

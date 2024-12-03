@@ -14,9 +14,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@RoomStyle.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.bookRoomController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.bookRoomController">
    <top>
-      <AnchorPane fx:id="topBar" onMouseDragged="#dragXY" onMousePressed="#setXY" prefHeight="56.0" prefWidth="600.0" styleClass="background" stylesheets="@RoomStyle.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="topBar" onMouseDragged="#dragXY" onMousePressed="#setXY" prefHeight="56.0" prefWidth="600.0" styleClass="topBar" stylesheets="@StyleSheet.css" BorderPane.alignment="CENTER">
          <children>
             <HBox alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="40.0">
                <children>
@@ -26,14 +26,14 @@
                      </font>
                   </Label>
                   <Pane prefWidth="415.0" />
-                  <Button mnemonicParsing="false" onAction="#close" text="X" />
+                  <Button mnemonicParsing="false" onAction="#close" styleClass="closeButton" stylesheets="@StyleSheet.css" text="X" />
                </children>
             </HBox>
          </children>
       </AnchorPane>
    </top>
    <center>
-      <VBox prefHeight="299.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <VBox prefHeight="299.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" BorderPane.alignment="CENTER">
          <children>
             <GridPane prefHeight="60.0" prefWidth="633.0">
                <children>
@@ -47,7 +47,7 @@
                         <Insets left="210.0" />
                      </GridPane.margin>
                   </Label>
-                  <DatePicker fx:id="StartDate" prefHeight="25.0" prefWidth="301.0" GridPane.columnIndex="1" />
+                  <DatePicker fx:id="StartDate" prefHeight="25.0" prefWidth="301.0" styleClass="topBar" stylesheets="@StyleSheet.css" GridPane.columnIndex="1" />
                   <DatePicker fx:id="EndDate" prefHeight="25.0" prefWidth="301.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                </children>
                <columnConstraints>
@@ -79,7 +79,7 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
                <children>
-                  <Button fx:id="singleButton" alignment="CENTER" mnemonicParsing="false" onAction="#single" prefHeight="41.0" prefWidth="190.0" stylesheets="@RoomStyle.css" text="Single">
+                  <Button fx:id="singleButton" alignment="CENTER" mnemonicParsing="false" onAction="#single" prefHeight="41.0" prefWidth="190.0" stylesheets="@StyleSheet.css" text="Single">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -90,7 +90,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="trippleButton" alignment="CENTER" mnemonicParsing="false" onAction="#triple" prefHeight="41.0" prefWidth="190.0" text="Triple" GridPane.rowIndex="1">
+                  <Button fx:id="trippleButton" alignment="CENTER" mnemonicParsing="false" onAction="#triple" prefHeight="41.0" prefWidth="190.0" stylesheets="@StyleSheet.css" text="Triple" GridPane.rowIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -101,7 +101,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="doubleButton" alignment="CENTER" mnemonicParsing="false" onAction="#doubleRoom" prefHeight="41.0" prefWidth="190.0" text="Double" GridPane.columnIndex="1">
+                  <Button fx:id="doubleButton" alignment="CENTER" mnemonicParsing="false" onAction="#doubleRoom" prefHeight="41.0" prefWidth="190.0" stylesheets="@StyleSheet.css" text="Double" GridPane.columnIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -112,7 +112,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="connectedButton" alignment="CENTER" mnemonicParsing="false" onAction="#connected" prefHeight="41.0" prefWidth="190.0" text="Connected" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button fx:id="connectedButton" alignment="CENTER" mnemonicParsing="false" onAction="#connected" prefHeight="41.0" prefWidth="190.0" stylesheets="@StyleSheet.css" text="Connected" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -123,7 +123,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="suiteButton" alignment="CENTER" mnemonicParsing="false" onAction="#suite" prefHeight="41.0" prefWidth="190.0" text="Suite" GridPane.rowIndex="2">
+                  <Button fx:id="suiteButton" alignment="CENTER" mnemonicParsing="false" onAction="#suite" prefHeight="41.0" prefWidth="190.0" stylesheets="@StyleSheet.css" text="Suite" GridPane.rowIndex="2">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
@@ -134,7 +134,7 @@
                         <Font size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="penthouseButton" alignment="CENTER" mnemonicParsing="false" onAction="#penthouse" prefHeight="41.0" prefWidth="190.0" text="Penthouse" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                  <Button fx:id="penthouseButton" alignment="CENTER" mnemonicParsing="false" onAction="#penthouse" prefHeight="41.0" prefWidth="190.0" stylesheets="@StyleSheet.css" text="Penthouse" GridPane.columnIndex="1" GridPane.rowIndex="2">
                      <font>
                         <Font size="14.0" />
                      </font>

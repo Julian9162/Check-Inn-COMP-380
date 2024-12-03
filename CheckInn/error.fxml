@@ -3,23 +3,17 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.geometry.Rectangle2D?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.editController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.errorController">
    <top>
       <AnchorPane stylesheets="@StyleSheet.css" BorderPane.alignment="CENTER">
          <children>
@@ -35,7 +29,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="2.0">
                <children>
-                  <Label stylesheets="@StyleSheet.css" text="CheckInn | Edit Your Reservation">
+                  <Label stylesheets="@StyleSheet.css" text="CheckInn | Reservation Error">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -51,37 +45,11 @@
    <center>
       <VBox alignment="CENTER" maxWidth="300.0" minWidth="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Label fx:id="reservationLabel" text="Reservation: " />
+            <Label fx:id="errorText" styleClass="errorText" stylesheets="@StyleSheet.css" text="The selected room type is unavailable for the selected dates!" textAlignment="CENTER" wrapText="true" />
             <Pane prefHeight="10.0" prefWidth="200.0" />
-            <Pane prefHeight="10.0" />
-            <GridPane>
-              <columnConstraints>
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
-                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <Label alignment="CENTER_RIGHT" stylesheets="@StyleSheet.css" text="Check In:" textAlignment="RIGHT">
-                     <opaqueInsets>
-                        <Insets right="50.0" />
-                     </opaqueInsets>
-                  </Label>
-                  <Label alignment="CENTER_RIGHT" stylesheets="@StyleSheet.css" text="Check Out:" textAlignment="RIGHT" GridPane.rowIndex="1" />
-                  <Label text="Room Type:" GridPane.rowIndex="2" />
-                  <Label text="Group Size:" GridPane.rowIndex="3" />
-                  <TextField fx:id="groupSize" promptText="New Group Size" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <DatePicker fx:id="checkInDate" GridPane.columnIndex="1" />
-                  <DatePicker fx:id="checkOutDate" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <ComboBox fx:id="roomType" prefWidth="150.0" promptText="New Room Type" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-               </children>
-            </GridPane>
-            <Pane prefHeight="10.0" prefWidth="200.0" />
-            <Button fx:id="cancelButton" mnemonicParsing="false" onAction="#editReserve" styleClass="loginButton" stylesheets="@StyleSheet.css" text="Submit" />
+            <Label fx:id="errorText1" styleClass="errorText" stylesheets="@StyleSheet.css" text="Press the button below to try again!" textAlignment="CENTER" wrapText="true" />
+            <Pane prefHeight="20.0" prefWidth="200.0" />
+            <Button mnemonicParsing="false" onAction="#returnButton" styleClass="loginButton" stylesheets="@StyleSheet.css" text="Return" />
          </children>
          <padding>
             <Insets left="30.0" right="30.0" />

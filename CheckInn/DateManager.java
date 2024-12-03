@@ -66,8 +66,6 @@ public class DateManager {
 
     public void sortDates() {
 
-        int count = 0;
-
         for (int i = 1; i <= dates.size(); i++) {
 
             for (int j = 0; j < dates.size() - 1; j++) {
@@ -75,14 +73,11 @@ public class DateManager {
                 if (dates.get(j).getLocalDate().isAfter(dates.get(j + 1).getLocalDate())) 
                     swapDates(j, j + 1);
 
-                count++;
-
             }
 
         }
 
         updateDateFile();
-        System.out.println(count + " werwerwerwerwee");
 
     }
 
@@ -190,11 +185,13 @@ public class DateManager {
     public void removeFromDates(Reservation r) {
 
         String s;
+        Date d;
 
         for (int i = 0; i <= r.getSchedule().size() - 1; i++) {
 
             s = r.getSchedule().get(i).dateString();
-            r.getSchedule().get(i).updateDate(s, 0);;
+            d = dates.get(dateS.indexOf(s));
+            d.updateDate(r.getRoomType(), 0);
 
         }
 

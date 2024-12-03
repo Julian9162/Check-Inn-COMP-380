@@ -3,6 +3,7 @@ package CheckInn;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -10,25 +11,26 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-// Controller class for the Customer Information page taking in their name and email
-
-public class CustInfoController{
+public class transactionsController implements Initializable {
     @FXML
     private HBox topBar;
     @FXML
     private TextField FullName;
     @FXML
-    private TextField Email;
+    private Label Amount;
     @FXML
-    private TextField GroupSize;
-    @FXML
-    private Label loginLabel;
+    private Label errorText;
 
     private Stage stage;
     double x = 0, y = 0;
+
+    private String name;
+    private String customerName;
+    private int price;
 
     //close button handler
     public void close(ActionEvent event) {
@@ -57,24 +59,26 @@ public class CustInfoController{
         stage.show();
     }
 
-    //submit info button handler
-    public void submitInfo(ActionEvent event) throws IOException {
-        CheckInnInterface.reserve = CheckInnInterface.resManager.createReservation(FullName.getText(),CheckInnInterface.type,Integer.parseInt(GroupSize.getText()),
-                                                        CheckInnInterface.checkin,CheckInnInterface.checkout,Email.getText());
+    //submit button handler
+    public void submit(ActionEvent event) throws IOException {
+        name = FullName.getText();
+        customerName = CheckInnInterface.reserve.getCustomer().getFullName();
 
-        if (CheckInnInterface.reserve == null) {
-            //go to error page
-            CheckInnInterface.returnFXML = "bookRoom.fxml";
-
+        if(name.equals(customerName)) {
             stage = (Stage) topBar.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("error.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
             stage.setScene(new Scene(root));
             stage.show();
         } else {
-            stage = (Stage) topBar.getScene().getWindow();
-            Parent root = FXMLLoader.load(getClass().getResource("transactions.fxml"));
-            stage.setScene(new Scene(root));
-            stage.show();
+            errorText.setText("Invalid name! Please try again.");
         }        
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1) {
+        //Display price
+        price = CheckInnInterface.empManager.calculateTotalcost(CheckInnInterface.reserve);
+        Amount.setText("$" + price);
+        errorText.setText("");
     }
 }

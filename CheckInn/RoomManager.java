@@ -137,9 +137,8 @@ public class RoomManager {
 				return true; // For successful 
 			} 
 			
-        } else {
-            return false; // For unsuccessful
         }
+        return false; // For unsuccessful
     }
 
      /**

@@ -232,4 +232,10 @@ public class EmployeeManager {
 
         return pricePerNight * r.nightsSpent();
     }
+
+    public void changeRoomCleanStatus(String roomNumber, boolean isClean) throws IOException{
+
+        CheckInnInterface.roomManager.markRoomCleanStatus(roomNumber, isClean);
+
+    } // End changeRoomAvailability(roomNumber, isClean) 
 } // End EmployeeManager class

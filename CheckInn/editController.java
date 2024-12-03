@@ -14,9 +14,9 @@ import javafx.stage.*;
 
 public class editController implements Initializable{
     @FXML
-    private TextField checkInDate;
+    private DatePicker checkInDate;
     @FXML
-    private TextField checkOutDate;
+    private DatePicker checkOutDate;
     @FXML
     private Button closeButton;
     @FXML
@@ -24,11 +24,9 @@ public class editController implements Initializable{
     @FXML
     private HBox topBar;
     @FXML
-    private TextField roomType;
+    private ComboBox<String> roomType;
     @FXML
     private TextField groupSize;
-    @FXML
-    private Label errorText;
 
     //reservation details
     private long reservationNumber;
@@ -67,26 +65,47 @@ public class editController implements Initializable{
     //submit button handler
     public void editReserve(ActionEvent event) throws IOException {
         //call edit function with values of new reservation details
-        if (CheckInnInterface.resManager.editReservation(reservationNumber, roomType.getText(),
-                Integer.parseInt(groupSize.getText()), checkInDate.getText(), checkOutDate.getText())) {
+        if (CheckInnInterface.resManager.editReservation(reservationNumber, roomType.getValue(),
+                Integer.parseInt(groupSize.getText()), checkInDate.getValue().toString(), checkOutDate.getValue().toString())) {
 
                     //edit was successful, go to review page
                     stage = (Stage) topBar.getScene().getWindow();
-                    Parent root = FXMLLoader.load(getClass().getResource("review.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("transactions.fxml"));
                     stage.setScene(new Scene(root));
                     stage.show(); 
         } else {
-            errorText.setText("Error! Invalid reservation status!");
-        }        
+            CheckInnInterface.returnFXML = "edit.FXML";
+            //edit was successful, go to review page
+            stage = (Stage) topBar.getScene().getWindow();
+            Parent root = FXMLLoader.load(getClass().getResource("error.fxml"));
+            stage.setScene(new Scene(root));
+            stage.show(); 
+        }  
     }
 
+    @SuppressWarnings("unused")
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables
         reservationNumber = CheckInnInterface.reserve.getReservationID();
         name = CheckInnInterface.reserve.getCustomer().getFirstName();
+        roomType.getItems().addAll("Single", "Double", "Triple", "Connected", "Suite", "Penthouse");
 
         //Initialize page
         reservationLabel.setText("Editing Reservation: " + reservationNumber + " for " + name);
+        checkInDate.setValue(CheckInnInterface.reserve.getCheckInDate().getLocalDate());
+        checkOutDate.setValue(CheckInnInterface.reserve.getCheckOutDate().getLocalDate());
+
+        //listeners to date pickers
+        checkInDate.valueProperty().addListener((e, oldValue, newValue) -> {
+            if(newValue.isAfter(checkOutDate.getValue())) {
+                checkOutDate.setValue(newValue.plusDays(1));
+            }
+        });
+        checkOutDate.valueProperty().addListener((e, oldValue, newValue) -> {
+            if(newValue.isBefore(checkInDate.getValue())) {
+                checkInDate.setValue(newValue.minusDays(1));
+            }
+        });
     }
 }

@@ -22,6 +22,7 @@ public class CheckInnInterface extends Application {
     public static String room;
     public static String checkin;
     public static String checkout;
+    public static String returnFXML;
 
     public static void main(String[] args) {
         launch(args);

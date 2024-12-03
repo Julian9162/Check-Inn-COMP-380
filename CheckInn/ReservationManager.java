@@ -353,7 +353,8 @@ public class ReservationManager {
                     r.setRoomType(roomType);
                     r.setSchedule(checkIn, checkOut);
                     r.updateSchedule();
-                    
+                    CheckInnInterface.dateManager.updateDateFile();
+
                 }
 
             }
@@ -369,6 +370,7 @@ public class ReservationManager {
                         CheckInnInterface.dateManager.removeFromDates(r);
                         r.setSchedule(checkIn, checkOut);
                         r.updateSchedule();
+                        CheckInnInterface.dateManager.updateDateFile();
                         
                     }
 

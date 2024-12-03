@@ -1,27 +1,20 @@
-package com.example.custtaction;
+package CheckInn;
 
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
 import java.io.IOException;
+import javafx.event.*;
+import javafx.fxml.*;
+import javafx.scene.*;
+import javafx.scene.control.*;
+import javafx.scene.input.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 
-public class CustTcon {
-    @FXML
-    private AnchorPane topBar;
-    @FXML
-    private TextField FullName;
-    @FXML
-    private Label Amount;
-    @FXML
+public class errorController{
 
+    @FXML
+    private HBox topBar;
+    @FXML
+    private Label errorText;
 
     private Stage stage;
     double x = 0, y = 0;
@@ -48,8 +41,16 @@ public class CustTcon {
     //home button handler
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
-        Parent root = FXMLLoader.load(getClass().getResource("book-room.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         stage.setScene(new Scene(root));
         stage.show();
+    }
+
+    //return button handler
+    public void returnButton(ActionEvent event) throws IOException {
+        stage = (Stage) topBar.getScene().getWindow();
+        Parent root = FXMLLoader.load(getClass().getResource(CheckInnInterface.returnFXML));
+        stage.setScene(new Scene(root));
+        stage.show();        
     }
 }

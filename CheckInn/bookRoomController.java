@@ -1,7 +1,5 @@
 package CheckInn;
 
-import javafx.fxml.FXML;
-import javafx.scene.control.Label;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -141,9 +139,14 @@ public class bookRoomController implements Initializable{
         roomButtons.getChildren().clear();
         //listeners to date pickers
         StartDate.valueProperty().addListener((e, oldValue, newValue) -> {
-            EndDate.setValue(newValue.plusDays(1));
+            if((oldValue == null) || (newValue.isAfter(EndDate.getValue()))) {
+                EndDate.setValue(newValue.plusDays(1));
+            }
         });
         EndDate.valueProperty().addListener((e, oldValue, newValue) -> {
+            if((newValue.isBefore(StartDate.getValue()))) {
+                StartDate.setValue(newValue.minusDays(1));
+            }
             roomButtons.getChildren().clear();
             roomButtons.getChildren().addAll(singleButton,doubleButton,trippleButton,connectedButton,suiteButton,penthouseButton);
         });

@@ -14,19 +14,19 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@CustInfo.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.CustInfoController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="background" stylesheets="@StyleSheet.css" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.CustInfoController">
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <HBox fx:id="topBar" alignment="CENTER_RIGHT" onMouseClicked="#setXY" onMouseDragged="#dragXY" prefWidth="600.0" styleClass="topBar" stylesheets="@CustInfo.css">
+            <HBox fx:id="topBar" alignment="CENTER_RIGHT" onMouseClicked="#setXY" onMouseDragged="#dragXY" prefWidth="600.0" styleClass="topBar" stylesheets="@StyleSheet.css">
                <children>
-                  <Label prefWidth="250.0" stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="CheckInn | Enter Reservation Information">
+                  <Label prefWidth="250.0" text="CheckInn | Enter Reservation Information">
                      <font>
                         <Font name="Corbel" size="14.0" />
                      </font>
                   </Label>
                   <Pane prefWidth="305.0" />
-                  <Button mnemonicParsing="false" onAction="#close" text="X" textAlignment="CENTER" />
+                  <Button mnemonicParsing="false" onAction="#close" styleClass="closeButton" stylesheets="@StyleSheet.css" text="X" textAlignment="CENTER" />
                </children>
                <padding>
                   <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -81,7 +81,7 @@
                </children>
             </GridPane>
             <Pane prefHeight="15.0" />
-            <Button mnemonicParsing="false" onAction="#submitInfo" stylesheets="@CustInfo.css" text="Confirm">
+            <Button mnemonicParsing="false" onAction="#submitInfo" stylesheets="@StyleSheet.css" text="Confirm">
                <VBox.margin>
                   <Insets left="250.0" />
                </VBox.margin>

@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.text.*?>
-<?import java.lang.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="CheckInn.transactionsController">
    <top>
       <AnchorPane BorderPane.alignment="CENTER">
          <children>
-            <AnchorPane stylesheets="@../../../../../../../CheckInn/StyleSheet.css">
+            <AnchorPane>
                <children>
-                  <HBox fx:id="topBar" alignment="CENTER_RIGHT" onMouseDragged="#dragXY" onMousePressed="#setXY" prefWidth="600.0" styleClass="topBar" stylesheets="@../../../../../../../CheckInn/StyleSheet.css">
+                  <HBox fx:id="topBar" alignment="CENTER_RIGHT" onMouseDragged="#dragXY" onMousePressed="#setXY" prefWidth="600.0" styleClass="topBar" stylesheets="@StyleSheet.css">
                      <children>
-                        <Button mnemonicParsing="false" onAction="#loginButton" styleClass="topBarButton" stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="Employee Login" />
+                        <Button mnemonicParsing="false" onAction="#homeButton" styleClass="topBarButton" stylesheets="@StyleSheet.css" text="Home" />
                         <Pane prefWidth="8.0" />
-                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#close" styleClass="closeButton" stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="X" textAlignment="CENTER" />
+                        <Button fx:id="closeButton" mnemonicParsing="false" onAction="#close" styleClass="closeButton" stylesheets="@StyleSheet.css" text="X" textAlignment="CENTER" />
                      </children>
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
@@ -25,7 +31,7 @@
                   </HBox>
                   <HBox alignment="CENTER_LEFT" layoutX="2.0" layoutY="2.0">
                      <children>
-                        <Label stylesheets="@../../../../../../../CheckInn/StyleSheet.css" text="CheckInn | Home">
+                        <Label stylesheets="@StyleSheet.css" text="CheckInn | Billing Information">
                            <font>
                               <Font name="Corbel" size="14.0" />
                            </font>
@@ -41,7 +47,7 @@
       </AnchorPane>
    </top>
    <left>
-      <HBox prefHeight="100.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="100.0" prefWidth="200.0" styleClass="background" stylesheets="@StyleSheet.css" BorderPane.alignment="CENTER">
          <children>
             <Pane prefHeight="63.0" prefWidth="600.0">
                <HBox.margin>
@@ -69,19 +75,19 @@
                                     <Insets left="100.0" />
                                  </padding>
                               </Label>
-                              <TextField GridPane.columnIndex="1" />
+                              <TextField fx:id="FullName" GridPane.columnIndex="1" />
                               <Label prefHeight="17.0" prefWidth="161.0" text="Total Price:" GridPane.rowIndex="1">
                                  <GridPane.margin>
                                     <Insets left="99.0" />
                                  </GridPane.margin>
                               </Label>
-                              <Label prefHeight="23.0" prefWidth="159.0" text="amount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <Label fx:id="Amount" prefHeight="23.0" prefWidth="159.0" text="amount" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                            </children>
                         </GridPane>
-                        <Button layoutX="248.0" layoutY="107.0" mnemonicParsing="false" text="Confirm" />
+                        <Button layoutX="248.0" layoutY="107.0" mnemonicParsing="false" onAction="#submit" stylesheets="@StyleSheet.css" text="Confirm" />
                      </children>
                   </Pane>
-                  <Label layoutX="154.0" layoutY="28.0" prefHeight="60.0" prefWidth="235.0" text="Billing Information:">
+                  <Label layoutX="154.0" layoutY="20.0" prefHeight="60.0" prefWidth="235.0" text="Billing Information:">
                      <padding>
                         <Insets left="50.0" top="30.0" />
                      </padding>
@@ -89,6 +95,7 @@
                         <Font size="14.0" />
                      </font>
                   </Label>
+                  <Label fx:id="errorText" layoutX="261.0" layoutY="79.0" styleClass="errorText" stylesheets="@StyleSheet.css" text="Label" />
                </children>
             </Pane>
          </children>
