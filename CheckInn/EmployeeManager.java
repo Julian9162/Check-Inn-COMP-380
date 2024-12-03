@@ -145,6 +145,9 @@ public class EmployeeManager {
         // Remove reservation from active reservation linked list and csv file.
         CheckInnInterface.resManager.removeReservation(reservationID, 0);
 
+        //set room clean status to false when the guest checks out
+        changeRoomCleanStatus(r.getRoomNumber().toString(), false);
+
         return true; // Customer check out is a success
 
     } // End checkOutCustomer(reservationID)

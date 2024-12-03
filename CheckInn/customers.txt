@@ -1,4 +1,0 @@
-1414482,julian.aguiar.335@my.csun.edu,Aguiar,Julian
-2222222,briandiaz.gmail.com,Diaz,Brian
-8075280,patrick.karamian.374@my.csun.edu,Karamian,Patrick
-1212121,john.doe@gmail.com,Doe,Joe
