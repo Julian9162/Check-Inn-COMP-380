@@ -84,7 +84,7 @@ public class RoomManager {
 	    // Checks if the current room matches the specified room number 
 	    // if it does match then the availability status of the matched room is updated at index 2
             if (roomDetails[0].equals(roomNumber)) { 
-                roomDetails[2] = String.valueOf(availability); 
+                roomDetails[2] = String.valueOf(availability);
             }
             writer.write(String.join(",", roomDetails)); // Writing the updated room details to the file
             writer.newLine();

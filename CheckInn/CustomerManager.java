@@ -99,7 +99,7 @@ public class CustomerManager {
         // Writes lines to end of customer list file
         BufferedWriter writer = new BufferedWriter(new FileWriter("CheckInn\\customers.txt", true));
         // Write customer data in following order: customerID, email, lastName, firstName
-        writer.write("\n" + c.getCustomerID() + "," + c.getEmail() + "," + c.getLastName() + "," + c.getFirstName());
+        writer.write(c.getCustomerID() + "," + c.getEmail() + "," + c.getLastName() + "," + c.getFirstName());
         writer.newLine(); // Create new line
         writer.close(); // Close BufferedWriter
 
