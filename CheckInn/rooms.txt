@@ -1,5 +1,5 @@
 RoomNumber,RoomType,Availability,ReservationNumber,CleanStatus
-101,Single,false,548595163,false
+101,Single,true,0,true
 102,Single,true,0,true
 103,Single,true,0,true
 104,Single,true,0,true
@@ -74,7 +74,7 @@ RoomNumber,RoomType,Availability,ReservationNumber,CleanStatus
 173,Single,true,0,true
 174,Single,true,0,true
 175,Single,true,0,true
-176,Double,true,0,true
+176,Double,false,548593756,false
 177,Double,true,0,true
 178,Double,true,0,true
 179,Double,true,0,true

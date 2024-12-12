@@ -15,6 +15,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * transactionsController ---   Transactions Controller handles all the GUI for calculating the cost of a booking
+ *                              and authorizing the payment through validating customer credentials
+ * Utilizes               ---   transactions.fxml
+ * @author                      Patrick Karamian
+ */
 public class transactionsController implements Initializable {
     @FXML
     private HBox topBar;
@@ -32,26 +38,42 @@ public class transactionsController implements Initializable {
     private String customerName;
     private int price;
 
-    //close button handler
+    /**
+     Closes the window when the close button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void close(ActionEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.close();
     }
 
-    //saves position of window
+    /**
+     Saves position of the window when the mouse clicks on the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void setXY(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
 
-    //moves window when dragged
+    /**
+     Drags position of the window when the mouse drags the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void dragXY(MouseEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
 
-    //home button handler
+    /**
+     Returns to the home page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -59,7 +81,11 @@ public class transactionsController implements Initializable {
         stage.show();
     }
 
-    //submit button handler
+    /**
+     Validates guest credentials when the button is clicked and confirms the transaction
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void submit(ActionEvent event) throws IOException {
         name = FullName.getText();
         customerName = CheckInnInterface.reserve.getCustomer().getFullName();
@@ -74,6 +100,12 @@ public class transactionsController implements Initializable {
         }        
     }
 
+    /**
+     Initializes the window to show the price of the reservation that was just created
+     @param arg0     URL object to hold location of relative paths of objects in the stage
+     @param arg1     ResourceBundle object to hold the objects in the stage 
+     @return         none
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Display price

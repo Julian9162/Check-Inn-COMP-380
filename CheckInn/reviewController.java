@@ -12,6 +12,12 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+/**
+ * reviewController --- Review Controller handles all GUI for the review a reservation page
+ *                      where the user can view all the details of a previous reservation they made
+ * Utilizes         --- review.fxml
+ * @author              Patrick Karamian
+ */
 public class reviewController implements Initializable{
     @FXML
     private Label checkInDate;
@@ -39,26 +45,42 @@ public class reviewController implements Initializable{
     private Stage stage;
     double x = 0, y = 0;
 
-    //close button handler
+    /**
+     Closes the window when the close button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void close(ActionEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.close();
     }
 
-    //saves position of window
+    /**
+     Saves position of the window when the mouse clicks on the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void setXY(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
 
-    //moves window when dragged
+    /**
+     Drags position of the window when the mouse drags the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void dragXY(MouseEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
 
-    //home button handler
+    /**
+     Returns to the home page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -66,7 +88,11 @@ public class reviewController implements Initializable{
         stage.show();
     }
 
-    //cancel button handler
+    /**
+     Takes the user to the cancel reservation page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void cancelReserve(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("cancel.fxml"));
@@ -74,7 +100,11 @@ public class reviewController implements Initializable{
         stage.show();        
     }
 
-    //edit button handler
+    /**
+     Takes the user to the edit reservation page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void editReserve(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("edit.fxml"));
@@ -82,6 +112,12 @@ public class reviewController implements Initializable{
         stage.show();        
     }
 
+    /**
+     Initializes the window to show the reservation details of the reservation that was opened
+     @param arg0     URL object to hold location of relative paths of objects in the stage
+     @param arg1     ResourceBundle object to hold the objects in the stage 
+     @return         none
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables

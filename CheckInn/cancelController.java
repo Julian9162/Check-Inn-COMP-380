@@ -12,6 +12,11 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+/**
+ * cancelController --- Cancel Controller class that handles GUI for the cancelling a reservation
+ * Utilizes         --- cancel.fxml
+ * @author              Patrick Karamian
+ */
 public class cancelController implements Initializable{
     @FXML
     private Button closeButton;
@@ -24,26 +29,42 @@ public class cancelController implements Initializable{
     private Stage stage;
     double x = 0, y = 0;
 
-    //close button handler
+    /**
+     Closes the window when the close button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void close(ActionEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.close();
     }
 
-    //saves position of window
+    /**
+     Saves position of the window when the mouse clicks on the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void setXY(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
 
-    //moves window when dragged
+    /**
+     Drags position of the window when the mouse drags the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void dragXY(MouseEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
 
-    //home button handler
+    /**
+     Returns to the home page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -51,7 +72,11 @@ public class cancelController implements Initializable{
         stage.show();
     }
 
-    //cancel button handler
+    /**
+     Processes cancel button to cancel reservation
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void cancelReserve(ActionEvent event) throws IOException {
         //cancel reservation
         CheckInnInterface.resManager.removeReservation(CheckInnInterface.reserve.getReservationID(),2);
@@ -63,6 +88,12 @@ public class cancelController implements Initializable{
         stage.show();      
     }
 
+    /**
+     Initializes the window to show the reservation number that is being cancelled
+     @param arg0     URL object to hold location of relative paths of objects in the stage
+     @param arg1     ResourceBundle object to hold the objects in the stage 
+     @return         none
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables

@@ -11,6 +11,11 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+/**
+ * employeeHomeController ---   Employee Home Controller handles all GUI for the employee home page and all buttons in it
+ * Utilizes               ---   employeeHome.fxml
+ * @author                      Patrick Karamian
+ */
 public class employeeHomeController{
     @FXML
     private HBox topBar;
@@ -25,26 +30,42 @@ public class employeeHomeController{
     private Stage stage;
     double x = 0, y = 0;
 
-    //close button handler
+    /**
+     Closes the window when the close button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void close(ActionEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.close();
     }
 
-    //saves position of window
+    /**
+     Saves position of the window when the mouse clicks on the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void setXY(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
 
-    //moves window when dragged
+    /**
+     Drags position of the window when the mouse drags the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void dragXY(MouseEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
 
-    //home button handler
+    /**
+     Returns to the home page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -52,7 +73,11 @@ public class employeeHomeController{
         stage.show();
     }
 
-    //check in button handler
+    /**
+     Takes the employee to the check in page
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void checkIn(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("checkInSearch.fxml"));
@@ -60,7 +85,11 @@ public class employeeHomeController{
         stage.show();
     }
 
-    //check out button handler
+    /**
+     Takes the employee to the check out page
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void checkOut(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("checkOutSearch.fxml"));
@@ -68,7 +97,11 @@ public class employeeHomeController{
         stage.show();
     }
 
-    //check out button handler
+    /**
+     Takes the employee to the update room cleanliness page
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void updateClean(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("updateClean.fxml"));
@@ -76,7 +109,11 @@ public class employeeHomeController{
         stage.show();
     }
 
-    //view reports button handler
+    /**
+     Takes the employee to the view reports page
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void viewReports(ActionEvent event) throws IOException {
         fileChooser.setInitialDirectory(new File("CheckInn\\reports\\"));
         CheckInnInterface.file = fileChooser.showOpenDialog(new Stage());
@@ -87,7 +124,11 @@ public class employeeHomeController{
         stage.show();
     }
 
-    //update room availability button handler
+    /**
+     Takes the employee to the update room availability page
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void updateRoom(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("updateRoom.fxml"));

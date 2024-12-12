@@ -6,6 +6,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.*;
 import javafx.stage.*;
 
+/**
+ * CheckInnInterface ---    Check Inn Interface acts as the facade for the entire system, contains the main method, and instantiates
+ *                          all the Manager classes
+ * @author                  Patrick Karamian
+ */
 public class CheckInnInterface extends Application {
 
     public Stage window;
@@ -24,10 +29,19 @@ public class CheckInnInterface extends Application {
     public static String checkout;
     public static String returnFXML;
 
+    /**
+     Main method launches application
+     @return          none
+     */
     public static void main(String[] args) {
         launch(args);
     }
 
+    /**
+     Sets starting page as the home page when the application is launched
+     @param primaryStage    Stage object for the main window of the application
+     @return                none
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));

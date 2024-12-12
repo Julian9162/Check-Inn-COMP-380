@@ -12,6 +12,12 @@ import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 
+/**
+ * cancelConfirmationController --- Cancel Confirmation Controller class that handles GUI for the page where the user can confirm
+ *                                  that their reservation was cancelled properly
+ * Utilizes                     --- cancelConfirmation.fxml
+ * @author                          Patrick Karamian
+ */
 public class cancelConfirmationController implements Initializable{
     @FXML
     private Button closeButton;
@@ -24,26 +30,42 @@ public class cancelConfirmationController implements Initializable{
     private Stage stage;
     double x = 0, y = 0;
 
-    //close button handler
+    /**
+     Closes the window when the close button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void close(ActionEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.close();
     }
 
-    //saves position of window
+    /**
+     Saves position of the window when the mouse clicks on the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void setXY(MouseEvent event) {
         x = event.getSceneX();
         y = event.getSceneY();
     }
 
-    //moves window when dragged
+    /**
+     Drags position of the window when the mouse drags the drag bar
+     @param event     MouseEvent object for mouse click
+     @return          none
+     */
     public void dragXY(MouseEvent event) {
         stage = (Stage) topBar.getScene().getWindow();
         stage.setX(event.getScreenX() - x);
         stage.setY(event.getScreenY() - y);
     }
 
-    //home button handler
+    /**
+     Returns to the home page when the button is clicked
+     @param event     ActionEvent object for button click
+     @return          none
+     */
     public void homeButton(ActionEvent event) throws IOException {
         stage = (Stage) topBar.getScene().getWindow();
         Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
@@ -51,6 +73,12 @@ public class cancelConfirmationController implements Initializable{
         stage.show();
     }
 
+    /**
+     Initializes the window to show the reservation number of the reservation that was cancelled
+     @param arg0     URL object to hold location of relative paths of objects in the stage
+     @param arg1     ResourceBundle object to hold the objects in the stage 
+     @return         none
+     */
     @Override
     public void initialize(URL arg0, ResourceBundle arg1) {
         //Initialize variables
