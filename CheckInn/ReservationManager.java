@@ -66,7 +66,7 @@ public class ReservationManager {
 
     } // End ReservationManager() constructor
 
-    private boolean checkDates(String checkIn, String checkOut, String roomType, Reservation r) {
+    public boolean checkDates(String checkIn, String checkOut, String roomType, Reservation r) {
 
         Date d;
         String s;
