@@ -48,9 +48,14 @@ public class Customer {
         return last;
     } // End getLastName()
 
+    /**
+     * Retreives full name of customer
+     * @exception  none
+     * @return     first and last name
+     */ 
     public String getFullName() {
         return first + " " + last;
-    }
+    } // End getFullName()
 
     /**
      * Retreives email address of customer
