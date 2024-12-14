@@ -1,8 +1,6 @@
 package CheckInn;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.ArrayList;
 import org.junit.*;
 
 public class ReservationObjTest {

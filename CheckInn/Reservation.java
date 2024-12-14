@@ -158,7 +158,7 @@ public class Reservation {
     }
 
    public int nightsSpent() {
-        return schedule.size();
+        return schedule.size() - 1;
    }
 
 } // End Reservation class

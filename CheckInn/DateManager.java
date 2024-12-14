@@ -40,7 +40,13 @@ public class DateManager {
                 String[] dv = parts[0].split("-"); // Stores year, month, and day of date
                 // Saves the local date object of the date
                 LocalDate d = LocalDate.of(Integer.parseInt(dv[0]), Integer.parseInt(dv[1]), Integer.parseInt(dv[2]));
-                
+
+                // Create new date object and add to date lists
+                dates.add(new Date(parts[0], Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), 
+                Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), 
+                Integer.parseInt(parts[6])));
+                dateS.add(parts[0]);
+
                 // Removes any dates that have already passed from csv file and does not add to lists
                 if (LocalDate.now().isAfter(d)) {
 
@@ -48,12 +54,6 @@ public class DateManager {
                     continue;
 
                 } // End if
-
-                // Create new date object and add to date lists
-                dates.add(new Date(parts[0], Integer.parseInt(parts[1]), Integer.parseInt(parts[2]), 
-                Integer.parseInt(parts[3]), Integer.parseInt(parts[4]), Integer.parseInt(parts[5]), 
-                Integer.parseInt(parts[6])));
-                dateS.add(parts[0]);
 
             } // End while
 
@@ -181,7 +181,6 @@ public class DateManager {
     public void removeFromDateFile(String s) {
 
         try{
-        
             // Local Variables
             Date date = dates.get(dateS.indexOf(s)); // Save date object to be removed
             BufferedWriter writer = new BufferedWriter(new FileWriter(dateFile)); // Writer
