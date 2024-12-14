@@ -30,14 +30,6 @@ public class CheckInnInterface extends Application {
     public static String returnFXML;
 
     /**
-     Main method launches application
-     @return          none
-     */
-    public static void main(String[] args) {
-        launch(args);
-    }
-
-    /**
      Sets starting page as the home page when the application is launched
      @param primaryStage    Stage object for the main window of the application
      @return                none
